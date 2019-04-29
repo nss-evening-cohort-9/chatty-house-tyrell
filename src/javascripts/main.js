@@ -1,2 +1,4 @@
+import 'bootstrap';
 import '../styles/main.scss';
-console.error('hi');
+
+console.error('chatty');
