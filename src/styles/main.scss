@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./colors";
+@import "./sliderButtons";
 
 .lightMode {
   @include lightModeBody;
@@ -9,7 +10,7 @@
   @include darkModeBody;
 }
 
-img{
-  border-radius: 50%;
-  width: 3em;
+#darkOrLightModeDiv {
+  margin: 1em;
+  @include sliderButton;
 }

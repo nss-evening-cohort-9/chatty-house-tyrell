@@ -8,7 +8,13 @@
 </head>
 
 <body class="lightMode">
-  <button type="button" id="darkOrLightMode" class="btn btn-primary">Dark Mode</button>
-  <div id="displayMessage"></div>
+  <div id="darkOrLightModeDiv">
+    <label class='switch'>
+      <input type="checkbox" id="darkOrLightMode">
+      <span class="slider round"></span>
+    </label>  
+    <p>Dark Mode</p>
+  </div>
+  <div id="displayMessage" class="lightModeMessages"></div>
 </body>
 </html>
