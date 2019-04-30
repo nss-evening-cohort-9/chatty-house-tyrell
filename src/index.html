@@ -6,7 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chatty</title>
 </head>
-<body>
-  <div id="displayMessage"></div>
+
+<body class="lightMode">
+  <div id="darkOrLightModeDiv">
+    <label class='switch'>
+      <input type="checkbox" id="darkOrLightMode">
+      <span class="slider round"></span>
+    </label>  
+    <p>Dark Mode</p>
+  </div>
+  <div id="displayMessage" class="lightModeMessages"></div>
 </body>
 </html>
