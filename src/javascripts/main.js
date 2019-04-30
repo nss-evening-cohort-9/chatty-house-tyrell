@@ -1,9 +1,12 @@
+import messages from './components/displayMessage/messages';
+
 import 'bootstrap';
 import '../styles/main.scss';
 import themeChange from './components/themeChanger';
 
-console.error('chatty');
+
 const init = () => {
+  messages.getMessages();
   themeChange.DarkOrLightModeEventListener();
 };
 
