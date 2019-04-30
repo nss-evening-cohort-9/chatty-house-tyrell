@@ -5,3 +5,23 @@ $darkModeText: #D9FFF5;
 $darkModeBackgroundOne: #1D1E18;
 $darkModeBackgroundTwo: #6B8F71;
 $blue: #3A606E;
+
+@mixin lightModeBody {
+  background-color: $lightModeBackgroundOne;
+  color: $lightModeText;
+}
+
+@mixin darkModeBody {
+  background-color: $darkModeBackgroundOne;
+  color: $darkModeText;
+}
+
+@mixin lightModeMessages {
+  background-color: $lightModeBackgroundTwo;
+  color: $lightModeText;
+}
+
+@mixin darkModeMessages {
+  background-color: $darkModeBackgroundTwo;
+  color: $darkModeText;
+}

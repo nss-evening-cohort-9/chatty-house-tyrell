@@ -1,5 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./colors";
 
-body{
-  background-color: lime;
+.lightMode {
+  @include lightModeBody;
+}
+.darkMode {
+  @include darkModeBody;
 }
