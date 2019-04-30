@@ -1,7 +1,10 @@
+import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import util from '../../helpers/util';
 import './_message.scss';
 
+const messageInput = $('#message-input');
+let commentCounter = 1;
 let messages = [];
 
 const messageDomStringBuilder = () => {
@@ -23,6 +26,23 @@ const messageDomStringBuilder = () => {
   util.printToDom('displayMessage', domString);
 };
 
+const createMessageObject = () => {
+  const newMessage = messageInput[0].value;
+  const newTimeStamp = '04 20 1969';
+  const messageId = commentCounter;
+  commentCounter += 1;
+  const newMessageObject = {
+    id: messageId,
+    username: 'gerG',
+    message: newMessage,
+    timeStamp: newTimeStamp,
+    image: 'http://www.theribofbrown.com/wp-content/uploads/2016/04/happy.png',
+  };
+  messages.push(newMessageObject);
+  messageInput[0].value = '';
+  $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+  messageDomStringBuilder();
+};
 
 const getMessages = () => {
   messageData.getMessageData()
@@ -33,4 +53,4 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
-export default { getMessages };
+export default { getMessages, createMessageObject };
