@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chatty</title>
 </head>
-<body>
+<body class="lightMode">
   <header>
     <div id="app">
       <div class="pos-f-t">
@@ -39,5 +39,15 @@
     </div>
   </header>
   <div id="displayMessage"></div>
+  <div id="darkOrLightModeDiv">
+    <label class='switch'>
+      <input type="checkbox" id="darkOrLightMode">
+      <span class="slider round"></span>
+    </label>  
+    <p>Dark Mode</p>
+  </div>
+  <div id="displayMessage" class="lightModeMessages"></div>
+
+  <button class="clear-button">Clear</button>
 </body>
 </html>

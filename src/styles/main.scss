@@ -1,13 +1,16 @@
 @import "~bootstrap/scss/bootstrap";
+@import "./colors";
+@import "./sliderButtons";
 
-body{
-  background-color: lime;
-}
-img{
-  border-radius: 50%;
-  width: 3em;
+.lightMode {
+  @include lightModeBody;
 }
 
-.timeStamp, .username {
-  display: inline;
+.darkMode {
+  @include darkModeBody;
+}
+
+#darkOrLightModeDiv {
+  margin: 1em;
+  @include sliderButton;
 }
