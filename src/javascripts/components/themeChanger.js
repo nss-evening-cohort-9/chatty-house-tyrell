@@ -2,8 +2,8 @@ import $ from 'jquery';
 
 const body = $('body');
 
-const DarkModeEventListener = () => {
-  $('#darkMode').click(() => {
+const DarkOrLightModeEventListener = () => {
+  $('#darkOrLightMode').click(() => {
     if (body.hasClass('lightMode')) {
       body.removeClass('lightMode');
       body.addClass('darkMode');
@@ -15,4 +15,4 @@ const DarkModeEventListener = () => {
 };
 
 
-export default { DarkModeEventListener };
+export default { DarkOrLightModeEventListener };
