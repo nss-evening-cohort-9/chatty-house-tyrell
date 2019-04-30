@@ -11,6 +11,7 @@ const messageDomStringBuilder = () => {
   let domString = '';
   messages.forEach((message) => {
     domString += '<div class="media message container">';
+    domString += '<div class="msgBox">';
     domString += `<img src="${message.image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
@@ -18,6 +19,7 @@ const messageDomStringBuilder = () => {
     domString += `<p class= "timeStamp mt-0 col">${message.timeStamp}</p>`;
     domString += '</div>';
     domString += `<p>${message.message}</p>`;
+    domString += '</div>';
     domString += '</div>';
     domString += '</div>';
   });
