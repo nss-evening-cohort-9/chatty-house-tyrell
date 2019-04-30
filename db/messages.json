@@ -1,0 +1,40 @@
+{
+  "messages": 
+  [
+    {
+      "id" : 1000,
+      "username" : "kraM",
+      "message" : "What do we say to death?, Not today!!!",
+      "timeStamp": "September 8, 2014 8:02pm",
+      "image":"https://cdn.pixabay.com/photo/2016/08/21/16/31/emoticon-1610228__340.png"
+    },
+    {
+      "id" : 2000,
+      "username" : "gerG",
+      "message" : "For the night is dark and full of terror!!!",
+      "timeStamp": "September 8, 2014 8:02pm",
+      "image": "https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916__340.png"
+    },
+    {
+      "id" : 3000,
+      "username" : "naeS",
+      "message" : "Winter is coming!!!",
+      "timeStamp": "September 8, 2014 8:02pm",
+      "image": "https://cdn.pixabay.com/photo/2016/04/01/10/04/amusing-1299757__340.png"
+    },
+    {
+      "id" : 4000,
+      "username" : "Zoe",
+      "message" : "What is dead may never die!!!",
+      "timeStamp": "September 8, 2014 8:02pm",
+      "image": "https://cdn.pixabay.com/photo/2016/09/01/08/24/smiley-1635449__340.png"
+    },
+    {
+      "id" : 5000,
+      "username" : "Night King",
+      "message" : "Shoutout to House Tyrell!!!",
+      "timeStamp": "September 8, 2014 8:02pm",
+      "image":"https://vignette.wikia.nocookie.net/gameofthrones/images/1/1f/Night_King_BTW.jpg/revision/latest?cb=20171013162809"
+    }
+  ]
+}
