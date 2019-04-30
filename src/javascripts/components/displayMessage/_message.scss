@@ -12,6 +12,12 @@
     border-radius: 50%;
     max-width: 4em;
   }
+  .media-header {
+    .timeStamp {
+      font-size: .7em;
+      color: $blue;
+    }
+  }
 }
 
 .lightModeMessages{
