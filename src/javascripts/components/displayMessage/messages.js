@@ -20,9 +20,9 @@ const messageDomStringBuilder = () => {
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete">X</button>`;
+    domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
     domString += '</div>';
-    domString += `<p>${messages[i].message}</p>`;
+    domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
