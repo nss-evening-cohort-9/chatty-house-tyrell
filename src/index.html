@@ -9,7 +9,7 @@
 <body class="lightMode">
   <header>
     <div id="app">
-          <nav class="navbar navbar-dark bg-dark">
+          <nav class="navbar fixed-top navbar-dark bg-dark">
             <div class="text-center"><h1 class="text-white">Chatty Tyrell</h1></div>
             <div class="users nav-item dropdown btn-group dropleft">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,11 +43,11 @@
   <div id="displayMessage" class="lightModeMessages"></div>
   <div id="addMessage" class="container">
     <div class="row">
-      <div id="postingAsDiv" class="col-2 offset-1 mt-3">
+      <div id="postingAsDiv" class="col 12 col-md-3 offset-md-1 mt-3">
         <p>You are now posting as:</p>
         <p id="userPostingAs">Anonymous</p>
       </div>
-      <form class="col-8 offset-1 mt-3" id="messageSubmitForm" action="POST">
+      <form class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-1" id="messageSubmitForm" action="POST">
         <input id="message-input" type="text" placeholder="Say Something!">
         <button type="submit" id="messageSubmit" class="btn btn-success">Post</button>
       </form>
