@@ -6,6 +6,7 @@ import './_message.scss';
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
+const moment = require('moment');
 
 const messageDomStringBuilder = () => {
   let domString = '';
@@ -28,7 +29,7 @@ const messageDomStringBuilder = () => {
 
 const createMessageObject = () => {
   const newMessage = messageInput[0].value;
-  const newTimeStamp = '04 20 1969';
+  const newTimeStamp = moment().format('lll');
   const messageId = commentCounter;
   commentCounter += 1;
   const newMessageObject = {
