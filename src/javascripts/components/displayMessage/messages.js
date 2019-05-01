@@ -18,7 +18,7 @@ const messageDomStringBuilder = () => {
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    domString += `<button id = "deleteBtn${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete">X</button>`;
+    domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete">X</button>`;
     domString += '</div>';
     domString += `<p>${messages[i].message}</p>`;
     domString += '</div>';
@@ -29,8 +29,9 @@ const messageDomStringBuilder = () => {
 };
 const deleteMessage = (e) => {
   const buttonId = e.target.id;
+  console.error(buttonId);
   messages.forEach((message, index) => {
-    if (buttonId === message.id) {
+    if (buttonId === `${message.id}`) {
       messages.splice(index, 1);
     }
   });
@@ -39,8 +40,11 @@ const deleteMessage = (e) => {
 
 
 const addDeleteBtnEventListener = () => {
-  $('.delete').on('click', deleteMessage);
+  $(document).ready(() => {
+    $('.deleteButton').button().click(deleteMessage);
+  });
 };
+
 
 const keepClear = () => {
   messages = [];
