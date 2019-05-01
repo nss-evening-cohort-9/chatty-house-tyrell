@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
-// import util from '../../helpers/util';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -26,7 +25,6 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     $('#displayMessage').prepend(domString);
   }
-  // util.printToDom('displayMessage', domString);
 };
 
 const keepClear = () => {
