@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
-import util from '../../helpers/util';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -8,25 +7,25 @@ let commentCounter = 1;
 let messages = [];
 const moment = require('moment');
 
-
 const messageDomStringBuilder = () => {
-  let domString = '';
-  messages.forEach((message) => {
+  $('#displayMessage').html('');
+  for (let i = 0; i < 20 && i < messages.length; i += 1) {
+    let domString = '';
     domString += '<div class="media message container">';
     domString += '<div class="msgBox">';
-    domString += `<img src="${message.image}" class="mr-3 userImage" alt="...">`;
+    domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
-    domString += `<h5 class="userName mt-0 col-auto">${message.username}</h5>`;
-    domString += `<p class= "timeStamp mt-0 col">${message.timeStamp}</p>`;
+    domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
+    domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
     domString += '<button class="btn btn-danger btn-sm float right delete">X</button>';
     domString += '</div>';
-    domString += `<p>${message.message}</p>`;
+    domString += `<p>${messages[i].message}</p>`;
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
-  });
-  util.printToDom('displayMessage', domString);
+    $('#displayMessage').prepend(domString);
+  }
 };
 
 const keepClear = () => {
@@ -46,7 +45,7 @@ const createMessageObject = () => {
     timeStamp: newTimeStamp,
     image: 'http://www.theribofbrown.com/wp-content/uploads/2016/04/happy.png',
   };
-  messages.push(newMessageObject);
+  messages.unshift(newMessageObject);
   messageInput[0].value = '';
   $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
   messageDomStringBuilder();
