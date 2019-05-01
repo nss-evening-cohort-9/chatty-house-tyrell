@@ -1,13 +1,12 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
+import users from '../user';
 import './_message.scss';
-import greg from '../../../assests/images/greg.png';
-import mark from '../../../assests/images/mark.png';
-import sean from '../../../assests/images/sean.png';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
+const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
 const messageDomStringBuilder = () => {
@@ -33,6 +32,21 @@ const keepClear = () => {
   messages = [];
   messageDomStringBuilder();
 };
+const userInfoObject = [{
+  name: 'ANONYMOUS',
+  image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
+}];
+
+const userInfo = () => {
+  userSelectorButtons.click((e) => {
+    const userId = e.target.id;
+    for (let i = 0; i < users.users.length; i += 1) {
+      if (userId === users.users[i].id) {
+        userInfoObject.splice(0, 1, users.users[i].info);
+      }
+    }
+  });
+};
 
 const createMessageObject = () => {
   const newMessage = messageInput[0].value;
@@ -41,16 +55,17 @@ const createMessageObject = () => {
   commentCounter += 1;
   const newMessageObject = {
     id: messageId,
-    username: 'gerG',
+    username: userInfoObject[0].name,
     message: newMessage,
     timeStamp: newTimeStamp,
-    image: greg,
+    image: userInfoObject[0].image,
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';
   $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
   messageDomStringBuilder();
 };
+
 
 const getMessages = () => {
   messageData.getMessageData()
@@ -61,4 +76,9 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
-export default { getMessages, createMessageObject, keepClear };
+export default {
+  getMessages,
+  createMessageObject,
+  keepClear,
+  userInfo,
+};
