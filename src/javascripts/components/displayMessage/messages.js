@@ -10,7 +10,9 @@ const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
 const messageDomStringBuilder = () => {
+  // this clears the div each time for a fresh start
   $('#displayMessage').html('');
+  // loops thru the messages array but limits it to 20
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
     let domString = '';
     domString += '<div class="media message container">';
@@ -32,10 +34,17 @@ const keepClear = () => {
   messages = [];
   messageDomStringBuilder();
 };
+
 const userInfoObject = [{
   name: 'ANONYMOUS',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
+
+const postingAs = () => {
+  const username = userInfoObject[0].name;
+  console.error(username);
+  $('#userPostingAs').html(username);
+};
 
 const userInfo = () => {
   userSelectorButtons.click((e) => {
@@ -45,6 +54,7 @@ const userInfo = () => {
         userInfoObject.splice(0, 1, users.users[i].info);
       }
     }
+    postingAs();
   });
 };
 
@@ -66,7 +76,6 @@ const createMessageObject = () => {
   messageDomStringBuilder();
 };
 
-
 const getMessages = () => {
   messageData.getMessageData()
     .then((response) => {
@@ -76,6 +85,7 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
+
 export default {
   getMessages,
   createMessageObject,

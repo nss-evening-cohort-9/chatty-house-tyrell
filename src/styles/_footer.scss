@@ -1,12 +1,23 @@
 #addMessage {
   position: sticky;
+  color: white;
   bottom: 0;
   width: 100%;
-  height: 5em;
+  height: 7em;
   background-color: black;
-  text-align: center;
+  #postingAsDiv{
+    line-height: .75em;
+    text-align: center;
+  }
   #message-input {
     width: 40%;
     margin-top: 1.75em;
+  }
+}
+
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%;
   }
 }

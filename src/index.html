@@ -41,11 +41,18 @@
     <p>Dark Mode</p>
   </div>
   <div id="displayMessage" class="lightModeMessages"></div>
-  <div id="addMessage">
-    <form id="messageSubmitForm" action="POST">
-      <input id="message-input" type="text" placeholder="Say Something!">
-      <button type="submit" id="messageSubmit" class="btn btn-success">Post</button>
-    </form>
+  <div id="addMessage" class="container">
+    <div class="row">
+      <div id="postingAsDiv" class="col-2 offset-1 mt-3">
+        <p>You are now posting as:</p>
+        <p id="userPostingAs">Anonymous</p>
+      </div>
+      <form class="col-8 offset-1 mt-3" id="messageSubmitForm" action="POST">
+        <input id="message-input" type="text" placeholder="Say Something!">
+        <button type="submit" id="messageSubmit" class="btn btn-success">Post</button>
+      </form>
+    </div>
+    
   </div>
 
 
