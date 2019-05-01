@@ -8,6 +8,7 @@ let commentCounter = 1;
 let messages = [];
 const moment = require('moment');
 
+
 const messageDomStringBuilder = () => {
   messages = messages.reverse();
   let domString = '';
@@ -27,6 +28,11 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
   }
   util.printToDom('displayMessage', domString);
+};
+
+const keepClear = () => {
+  messages = [];
+  messageDomStringBuilder();
 };
 
 const createMessageObject = () => {
@@ -56,4 +62,4 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
-export default { getMessages, createMessageObject };
+export default { getMessages, createMessageObject, keepClear };
