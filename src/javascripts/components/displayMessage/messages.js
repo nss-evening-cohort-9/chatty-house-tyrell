@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import './_message.scss';
+import greg from '../../../assests/images/greg.png';
+import mark from '../../../assests/images/mark.png';
+import sean from '../../../assests/images/sean.png';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
@@ -12,7 +15,6 @@ const messageDomStringBuilder = () => {
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
     let domString = '';
     domString += '<div class="media message container">';
-    domString += '<div class="msgBox">';
     domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
@@ -22,7 +24,7 @@ const messageDomStringBuilder = () => {
     domString += `<p>${messages[i].message}</p>`;
     domString += '</div>';
     domString += '</div>';
-    domString += '</div>';
+    domString += '<hr>';
     $('#displayMessage').prepend(domString);
   }
 };
@@ -42,7 +44,7 @@ const createMessageObject = () => {
     username: 'gerG',
     message: newMessage,
     timeStamp: newTimeStamp,
-    image: 'http://www.theribofbrown.com/wp-content/uploads/2016/04/happy.png',
+    image: greg,
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';

@@ -3,21 +3,20 @@
 #displayMessage {
   width: 60%;
   margin: auto;
+  min-height: 20em;
 }
 .message {
-  min-height: 8em;
+  min-height: 6em;
   padding-top: .5em;
-  .msgBox {
-    .userImage {
-      margin: 0.75em;
-      border-radius: 50%;
-      max-width: 4em;
-    }
-    .media-header {
-      .timeStamp {
-        font-size: .7em;
-        color: $blue;
-      }
+  .userImage {
+    margin: 0.75em;
+    border-radius: 50%;
+    max-height: 3em;
+  }
+  .media-header {
+    .timeStamp {
+      font-size: .7em;
+      color: $blue;
     }
   }
 }
