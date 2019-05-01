@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
-import util from '../../helpers/util';
+// import util from '../../helpers/util';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -8,12 +8,10 @@ let commentCounter = 1;
 let messages = [];
 const moment = require('moment');
 
-
 const messageDomStringBuilder = () => {
-  messages = messages.reverse();
-  let domString = '';
+  $('#displayMessage').html('');
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
-    console.error(messages[i].image);
+    let domString = '';
     domString += '<div class="media message container">';
     domString += '<div class="msgBox">';
     domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
@@ -26,8 +24,9 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
+    $('#displayMessage').prepend(domString);
   }
-  util.printToDom('displayMessage', domString);
+  // util.printToDom('displayMessage', domString);
 };
 
 const keepClear = () => {

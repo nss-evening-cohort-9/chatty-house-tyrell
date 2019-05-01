@@ -6,8 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chatty</title>
 </head>
-
 <body class="lightMode">
+  <header>
+    <div id="app">
+          <nav class="navbar navbar-dark bg-dark">
+            <div class="text-center"><h1 class="text-white">Chatty Tyrell</h1></div>
+            <div class="users nav-item dropdown btn-group dropleft">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-success"><h4>Users</h4></button>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                <input type="radio" name="userName" id="mark" value="Mark">
+                <label for="mark">Mark</label><br>
+                
+                <input type="radio" name="userName" id="sean" value="Sean">
+                <label for="sean">Sean</label><br>
+                
+                <input type="radio" name="userName" id="greg" value="Greg">
+                <label for="greg">Greg</label><br>
+              </div>
+          </nav>
+        </div>
+    </div>
+  </header>
+  <div id="displayMessage"></div>
   <div id="darkOrLightModeDiv">
     <label class='switch'>
       <input type="checkbox" id="darkOrLightMode">
