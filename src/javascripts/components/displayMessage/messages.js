@@ -7,6 +7,8 @@ let commentCounter = 1;
 let messages = [];
 const moment = require('moment');
 
+let buttonId = '';
+
 const messageDomStringBuilder = () => {
   $('#displayMessage').html('');
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
@@ -28,11 +30,12 @@ const messageDomStringBuilder = () => {
   }
 };
 const deleteMessage = (e) => {
-  const buttonId = e.target.id;
-  console.error(buttonId);
+  buttonId = e.target.id;
   messages.forEach((message, index) => {
-    if (buttonId === `${message.id}`) {
-      messages.splice(index, 1);
+    if (e.target.classList.contains('delete')) {
+      if (buttonId === `${message.id}`) {
+        messages.splice(index, 1);
+      }
     }
   });
   messageDomStringBuilder();
@@ -41,7 +44,7 @@ const deleteMessage = (e) => {
 
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
-    $('.deleteButton').button().click(deleteMessage);
+    $('body').button().click(deleteMessage);
   });
 };
 
