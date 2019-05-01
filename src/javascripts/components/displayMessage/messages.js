@@ -18,7 +18,7 @@ const messageDomStringBuilder = () => {
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    domString += '<button class="btn btn-danger btn-sm float right delete">X</button>';
+    domString += `<button id = "deleteBtn${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete">X</button>`;
     domString += '</div>';
     domString += `<p>${messages[i].message}</p>`;
     domString += '</div>';
@@ -26,6 +26,20 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     $('#displayMessage').prepend(domString);
   }
+};
+const deleteMessage = (e) => {
+  const buttonId = e.target.id;
+  messages.forEach((message, index) => {
+    if (buttonId === message.id) {
+      messages.splice(index, 1);
+    }
+  });
+  messageDomStringBuilder();
+};
+
+
+const addDeleteBtnEventListener = () => {
+  $('.delete').on('click', deleteMessage);
 };
 
 const keepClear = () => {
@@ -60,4 +74,7 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
-export default { getMessages, createMessageObject, keepClear };
+
+export default {
+  getMessages, createMessageObject, keepClear, addDeleteBtnEventListener,
+};
