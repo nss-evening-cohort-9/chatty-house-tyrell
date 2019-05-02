@@ -8,6 +8,7 @@ let messages = [];
 const moment = require('moment');
 
 let buttonId = '';
+let buttonId1 = '';
 
 const messageDomStringBuilder = () => {
   $('#displayMessage').html('');
@@ -23,6 +24,10 @@ const messageDomStringBuilder = () => {
     domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
+    domString += '<div class = "editText">';
+    domString += `<button id = "${messages[i].id + 1}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
+    domString += '<textarea id = "textArea" rows="4" cols="50"name="hide" style="display:none;"></textarea>';
+    domString += '</div>';
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
@@ -41,6 +46,21 @@ const deleteMessage = (e) => {
   messageDomStringBuilder();
 };
 
+const showTextArea = (e) => {
+  buttonId1 = e.target.id;
+  messages.forEach((box) => {
+    if (e.target.classList.contains('edit')) {
+      if (buttonId1 === `${box.id + 1}`) {
+        $('.textArea').css({ display: 'block' });
+      }
+    }
+  });
+};
+const addEditTextEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').button().click(showTextArea);
+  });
+};
 
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
@@ -83,5 +103,5 @@ const getMessages = () => {
 };
 
 export default {
-  getMessages, createMessageObject, keepClear, addDeleteBtnEventListener,
+  getMessages, createMessageObject, keepClear, addDeleteBtnEventListener, addEditTextEventListener,
 };

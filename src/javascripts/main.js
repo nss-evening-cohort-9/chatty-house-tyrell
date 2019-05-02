@@ -12,6 +12,7 @@ const init = () => {
   addMessage.addEventHandler();
   clear.clearMessages();
   messages.addDeleteBtnEventListener();
+  messages.addEditTextEventListener();
 };
 
 init();
