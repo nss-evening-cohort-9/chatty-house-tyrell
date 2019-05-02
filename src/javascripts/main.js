@@ -12,7 +12,7 @@ const init = () => {
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
-  text.fontToggleEvent();
+  messages.addDeleteBtnEventListener();
 };
 
 init();
