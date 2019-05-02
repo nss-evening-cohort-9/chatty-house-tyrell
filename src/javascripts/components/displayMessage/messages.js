@@ -9,6 +9,8 @@ let messages = [];
 const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
+let buttonId = '';
+
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
@@ -21,14 +23,34 @@ const messageDomStringBuilder = () => {
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
+    domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
     domString += '</div>';
-    domString += `<p>${messages[i].message}</p>`;
+    domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
     domString += '</div>';
     domString += '</div>';
     domString += '<hr>';
     $('#displayMessage').prepend(domString);
   }
 };
+const deleteMessage = (e) => {
+  buttonId = e.target.id;
+  messages.forEach((message, index) => {
+    if (e.target.classList.contains('delete')) {
+      if (buttonId === `${message.id}`) {
+        messages.splice(index, 1);
+      }
+    }
+  });
+  messageDomStringBuilder();
+};
+
+
+const addDeleteBtnEventListener = () => {
+  $(document).ready(() => {
+    $('body').button().click(deleteMessage);
+  });
+};
+
 
 const keepClear = () => {
   messages = [];
@@ -91,4 +113,6 @@ export default {
   createMessageObject,
   keepClear,
   userInfo,
+  addDeleteBtnEventListener,
+
 };
