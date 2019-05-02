@@ -26,3 +26,6 @@
 .darkModeMessages{
   @include darkModeMessages;
 }
+#textArea{
+  display: none;
+}

@@ -26,7 +26,7 @@ const messageDomStringBuilder = () => {
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
     domString += '<div class = "editText">';
     domString += `<button id = "${messages[i].id + 1}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
-    domString += '<textarea id = "textArea" rows="4" cols="50"name="hide" style="display:none;"></textarea>';
+    domString += '<textarea id = "textArea" rows="4" cols="50"></textarea>';
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
