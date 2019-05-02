@@ -10,6 +10,10 @@
   @include darkModeBody;
 }
 
+#largeTextMode {
+  @include sliderButton;
+}
+
 #darkOrLightModeDiv {
   margin: 1em;
   @include sliderButton;

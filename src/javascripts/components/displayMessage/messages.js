@@ -11,6 +11,11 @@ const moment = require('moment');
 
 let buttonId = '';
 
+const userInfoObject = [{
+  name: 'ANONYMOUS',
+  image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
+}];
+
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
@@ -23,7 +28,9 @@ const messageDomStringBuilder = () => {
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
+    if (messages[i].username === userInfoObject[0].name) {
+      domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
+    }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
     domString += '</div>';
@@ -32,6 +39,7 @@ const messageDomStringBuilder = () => {
     $('#displayMessage').prepend(domString);
   }
 };
+
 const deleteMessage = (e) => {
   buttonId = e.target.id;
   messages.forEach((message, index) => {
@@ -44,27 +52,19 @@ const deleteMessage = (e) => {
   messageDomStringBuilder();
 };
 
-
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
     $('body').button().click(deleteMessage);
   });
 };
 
-
 const keepClear = () => {
   messages = [];
   messageDomStringBuilder();
 };
 
-const userInfoObject = [{
-  name: 'ANONYMOUS',
-  image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
-}];
-
 const postingAs = () => {
   const username = userInfoObject[0].name;
-  console.error(username);
   $('#userPostingAs').html(username);
 };
 
