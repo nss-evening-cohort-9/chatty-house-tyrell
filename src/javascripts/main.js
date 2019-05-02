@@ -13,6 +13,7 @@ const init = () => {
   addMessage.addEventHandler();
   clear.clearMessages();
   text.fontToggleEvent();
+  messages.addDeleteBtnEventListener();
 };
 
 init();
