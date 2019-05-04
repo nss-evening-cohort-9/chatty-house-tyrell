@@ -54,10 +54,10 @@ const deleteMessage = (e) => {
     if (e.target.classList.contains('delete')) {
       if (buttonId === `${message.id}`) {
         messages.splice(index, 1);
+        messageDomStringBuilder();
       }
     }
   });
-  messageDomStringBuilder();
 };
 
 const showTextArea = (e) => {
@@ -65,15 +65,16 @@ const showTextArea = (e) => {
   for (let i = 0; i < messages.length; i += 1) {
     if (buttonId1 === `edit${messages[i].id}`) {
       messages[i].hideOrShowEdit = 'shown';
+      messageDomStringBuilder();
     } else {
       messages[i].hideOrShowEdit = 'hidden';
+      messageDomStringBuilder();
     }
-    messageDomStringBuilder();
   }
 };
 const addEditTextEventListener = () => {
   $(document).ready(() => {
-    $('#displayMessage').button().click(showTextArea);
+    $('#displayMessage').on('click', '.edit', showTextArea);
   });
 };
 
