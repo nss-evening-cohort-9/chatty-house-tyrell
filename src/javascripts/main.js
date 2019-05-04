@@ -12,6 +12,7 @@ const init = () => {
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
+  messages.userInfo();
   messages.addDeleteBtnEventListener();
 };
 
