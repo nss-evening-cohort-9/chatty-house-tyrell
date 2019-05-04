@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
+import giphy from './giphy';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -16,9 +17,12 @@ const userInfoObject = [{
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
 
+
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
+  const theGif = giphy.selectedGif;
+  console.error('theGif', theGif);
   // loops thru the messages array but limits it to 20
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
     let domString = '';
@@ -33,6 +37,9 @@ const messageDomStringBuilder = () => {
     }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
+    if (theGif !== '') {
+      domString += `<img src="${theGif.images.fixed_width.url} alt="${theGif.title}">`;
+    }
     domString += '</div>';
     domString += '</div>';
     domString += '<hr>';
