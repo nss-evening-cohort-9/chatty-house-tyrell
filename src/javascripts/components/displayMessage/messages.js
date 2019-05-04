@@ -12,32 +12,56 @@ const moment = require('moment');
 
 let buttonId = '';
 
-const userInfoObject = [{
-  name: 'Anonymous',
-  image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
-}];
+const userInfoObject = [
+  {
+    id: 'user0',
+    info: {
+      name: 'Anonymous',
+      image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
+    },
+  }];
 
+const thumbBtnCheck = (btnId, messageId, user) => {
+  for (let i = 0; i < users.users.length; i += 1) {
+    if (user === users.users.user.id) {
+      console.error(btnId.indexOf('thumb-up') === 0);
+      // let newVote = {
+      //   message: messageId,
+      //   up: true,
+      //   down: false,
+      // }
+    }
+  }
+};
 
 const addThumbUp = (e) => {
-  const thumbUpId = e.target.id;
-  const thumbUpNameId = e.target.parentElement.id;
+  const thumbUpId = e.currentTarget.id;
+  const message = $(thumbUpId).closest('.message');
+  console.error(message, 'mess');
+  const messageId = message[0].id;
+  const user = userInfoObject[0].user.id;
+  thumbBtnCheck(thumbUpId, messageId, user);
+  console.error(e.target);
   for (let i = 0; i < messages.length; i += 1) {
     if (thumbUpId === `thumb-up-${messages[i].id}`) {
       messages[i].thumbsUp += 1;
     }
   }
-  console.error('thumbupId', thumbUpId);
-  console.error('thumbupNameId', thumbUpNameId);
 };
 
 const addThumbDown = (e) => {
-  const thumbDownId = e.target.id;
+  const thumbDownId = e.currentTarget.id;
+  const message = $(thumbDownId).closest('.message');
+  const messageId = message[0].id;
+  const user = userInfoObject[0].user.id;
+  thumbBtnCheck(thumbDownId, messageId, user);
+  console.error('messageId', messageId);
+  // thumbBtnCheck(thumbDownId);
   for (let i = 0; i < messages.length; i += 1) {
     if (thumbDownId === `thumb-down-${messages[i].id}`) {
       messages[i].thumbsDown += 1;
     }
   }
-  console.error('thumbDownId', thumbDownId);
 };
 
 const addThumbEvents = () => {
@@ -45,20 +69,21 @@ const addThumbEvents = () => {
   $('.thumbs-down').on('click', addThumbDown);
 };
 
+
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
   // loops thru the messages array but limits it to 20
   for (let i = 0; i < 20 && i < messages.length; i += 1) {
     let domString = '';
-    domString += '<div class="media message container">';
+    domString += `<div id="${messages[i].id}" class="media message container">`;
     domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
     domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    if (messages[i].username === userInfoObject[0].name) {
-      domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
+    if (messages[i].username === userInfoObject[0].info.name) {
+      domString += `<button id="${messages[i].id}" class="deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
     }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
@@ -66,11 +91,10 @@ const messageDomStringBuilder = () => {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
     }
     domString += '</div>';
-    domString += '</div>';
     domString += '<div class="thumbs row">';
     domString += `<div id="thumb-up-for-${messages[i].username}" class="col-auto ml-3">`;
     domString += `<button type="button" id="thumb-up-${messages[i].id}" class="thumb-btn thumbs-up btn btn-primary"`;
-    if (messages[i].username === userInfoObject[0].name || userInfoObject[0].name === 'Anonymous') {
+    if (messages[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
       domString += 'disabled';
     }
     domString += '>';
@@ -80,7 +104,7 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += `<div id="thumb-down-for-${messages[i].username}" class="col-auto">`;
     domString += `<button type="button" id="thumb-down-${messages[i].id}" class="thumb-btn thumbs-down btn btn-primary"`;
-    if (messages[i].username === userInfoObject[0].name || userInfoObject[0].name === 'Anonymous') {
+    if (messages[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
       domString += 'disabled';
     }
     domString += '>';
@@ -119,7 +143,8 @@ const keepClear = () => {
 };
 
 const postingAs = () => {
-  const username = userInfoObject[0].name;
+  const username = userInfoObject[0].info.name;
+  console.error(username);
   $('#userPostingAs').html(username);
 };
 
@@ -127,8 +152,8 @@ const userInfo = () => {
   userSelectorButtons.click((e) => {
     const userId = e.target.id;
     for (let i = 0; i < users.users.length; i += 1) {
-      if (userId === users.users[i].id) {
-        userInfoObject.splice(0, 1, users.users[i].info);
+      if (userId === users.users[i].user.id) {
+        userInfoObject.splice(0, 1, users.users[i].user);
       }
     }
     postingAs();
@@ -149,10 +174,10 @@ const createMessageObject = () => {
   commentCounter += 1;
   const newMessageObject = {
     id: messageId,
-    username: userInfoObject[0].name,
+    username: userInfoObject[0].info.name,
     message: newMessage,
     timeStamp: newTimeStamp,
-    image: userInfoObject[0].image,
+    image: userInfoObject[0].info.image,
     gif: selectedGif,
     gifAltText: gifAlternateText,
     thumbsUp: 0,

@@ -4,29 +4,47 @@ import sean from '../../assests/images/sean.png';
 
 const users = [
   {
-    id: 'user0',
-    info: {
-      name: 'Anonymous',
-      image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
+    user: {
+      id: 'user0',
+      info: {
+        name: 'Anonymous',
+        image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
+      },
+      thumbs: [],
     },
   },
   {
-    id: 'user1',
-    info: {
-      name: 'gerG',
-      image: greg,
+    user: {
+      id: 'user1',
+      info: {
+        name: 'gerG',
+        image: greg,
+      },
+      thumbs: [
+        {
+          messageId: 2,
+          up: true,
+          down: false,
+        },
+      ],
     },
   }, {
-    id: 'user2',
-    info: {
-      name: 'kraM',
-      image: mark,
+    user: {
+      id: 'user2',
+      info: {
+        name: 'kraM',
+        image: mark,
+      },
+      thumbs: [],
     },
   }, {
-    id: 'user3',
-    info: {
-      name: 'naeS',
-      image: sean,
+    user: {
+      id: 'user3',
+      info: {
+        name: 'naeS',
+        image: sean,
+      },
+      thumbs: '',
     },
   },
 ];
