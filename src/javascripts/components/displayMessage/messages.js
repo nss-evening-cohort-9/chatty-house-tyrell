@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
+import giphy from './giphy';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -16,6 +17,7 @@ const userInfoObject = [{
   name: 'ANONYMOUS',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
+
 
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
@@ -38,9 +40,12 @@ const messageDomStringBuilder = () => {
     domString += `<button id = "edit${messages[i].id}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
     domString += '</div>';
     domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
-    domString += '<textarea id = "textArea" rows="4" cols="50"></textarea>';
+    domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
     domString += '<button id = "postEdit" class = "btn btn-dark btn-sm float right">Post</button>';
     domString += '</div>';
+    if (messages[i].gif !== '') {
+      domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
+    }
     domString += '</div>';
     domString += '</div>';
     domString += '<hr>';
@@ -72,6 +77,10 @@ const showTextArea = (e) => {
     }
   }
 };
+
+const postEditComment = () => {
+
+};
 const addEditTextEventListener = () => {
   $(document).ready(() => {
     $('#displayMessage').on('click', '.edit', showTextArea);
@@ -81,6 +90,12 @@ const addEditTextEventListener = () => {
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
     $('body').button().click(deleteMessage);
+  });
+};
+
+const addPostEditCommentEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').on('click', 'postEdit', postEditComment);
   });
 };
 
@@ -110,6 +125,13 @@ const createMessageObject = () => {
   const newMessage = messageInput[0].value;
   const newTimeStamp = moment().format('lll');
   const messageId = commentCounter;
+  let selectedGif = '';
+  let gifAlternateText = '';
+  const theGif = giphy.getSelectedGif();
+  if (theGif !== '') {
+    selectedGif = theGif.images.fixed_width.url;
+    gifAlternateText = theGif.title;
+  }
   commentCounter += 1;
   const newMessageObject = {
     id: messageId,
@@ -118,10 +140,15 @@ const createMessageObject = () => {
     timeStamp: newTimeStamp,
     image: userInfoObject[0].image,
     hideOrShowEdit: 'hidden',
+    gif: selectedGif,
+    gifAltText: gifAlternateText,
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';
   $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+  $('#gifAddedBadge')[0].style.display = 'none';
+  $('#gifChoiceDiv').empty();
+  giphy.clearSelectedGif();
   messageDomStringBuilder();
 };
 
@@ -142,4 +169,5 @@ export default {
   userInfo,
   addDeleteBtnEventListener,
   addEditTextEventListener,
+  addPostEditCommentEventListener,
 };
