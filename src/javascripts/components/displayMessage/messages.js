@@ -13,10 +13,37 @@ const moment = require('moment');
 let buttonId = '';
 
 const userInfoObject = [{
-  name: 'ANONYMOUS',
+  name: 'Anonymous',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
 
+
+const addThumbUp = (e) => {
+  const thumbUpId = e.target.id;
+  const thumbUpNameId = e.target.parentElement.id;
+  for (let i = 0; i < messages.length; i += 1) {
+    if (thumbUpId === `thumb-up-${messages[i].id}`) {
+      messages[i].thumbsUp += 1;
+    }
+  }
+  console.error('thumbupId', thumbUpId);
+  console.error('thumbupNameId', thumbUpNameId);
+};
+
+const addThumbDown = (e) => {
+  const thumbDownId = e.target.id;
+  for (let i = 0; i < messages.length; i += 1) {
+    if (thumbDownId === `thumb-down-${messages[i].id}`) {
+      messages[i].thumbsDown += 1;
+    }
+  }
+  console.error('thumbDownId', thumbDownId);
+};
+
+const addThumbEvents = () => {
+  $('.thumbs-up').on('click', addThumbUp);
+  $('.thumbs-down').on('click', addThumbDown);
+};
 
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
@@ -40,9 +67,32 @@ const messageDomStringBuilder = () => {
     }
     domString += '</div>';
     domString += '</div>';
+    domString += '<div class="thumbs row">';
+    domString += `<div id="thumb-up-for-${messages[i].username}" class="col-auto ml-3">`;
+    domString += `<button type="button" id="thumb-up-${messages[i].id}" class="thumb-btn thumbs-up btn btn-primary"`;
+    if (messages[i].username === userInfoObject[0].name || userInfoObject[0].name === 'Anonymous') {
+      domString += 'disabled';
+    }
+    domString += '>';
+    domString += `👍<span class="badge badge-light">${messages[i].thumbsUp}</span>`;
+    domString += '<span class="sr-only">Thumbs Ups</span>';
+    domString += '</button>';
+    domString += '</div>';
+    domString += `<div id="thumb-down-for-${messages[i].username}" class="col-auto">`;
+    domString += `<button type="button" id="thumb-down-${messages[i].id}" class="thumb-btn thumbs-down btn btn-primary"`;
+    if (messages[i].username === userInfoObject[0].name || userInfoObject[0].name === 'Anonymous') {
+      domString += 'disabled';
+    }
+    domString += '>';
+    domString += `👎<span class="badge badge-light">${messages[i].thumbsDown}</span>`;
+    domString += '<span class="sr-only">Thumbs Downs</span>';
+    domString += '</button>';
+    domString += '</div>';
+    domString += '</div>';
     domString += '<hr>';
     $('#displayMessage').prepend(domString);
   }
+  addThumbEvents();
 };
 
 const deleteMessage = (e) => {
@@ -105,6 +155,8 @@ const createMessageObject = () => {
     image: userInfoObject[0].image,
     gif: selectedGif,
     gifAltText: gifAlternateText,
+    thumbsUp: 0,
+    thumbsDown: 0,
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';
@@ -131,5 +183,5 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
-
+  addThumbEvents,
 };

@@ -6,7 +6,7 @@ const users = [
   {
     id: 'user0',
     info: {
-      name: 'ANONYMOUS',
+      name: 'Anonymous',
       image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
     },
   },
