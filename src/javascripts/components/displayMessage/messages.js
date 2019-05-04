@@ -12,6 +12,7 @@ const moment = require('moment');
 
 let buttonId = '';
 let buttonId1 = '';
+let postButtonId = '';
 
 const userInfoObject = [{
   name: 'ANONYMOUS',
@@ -41,7 +42,7 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
     domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
-    domString += '<button id = "postEdit" class = "btn btn-dark btn-sm float right">Post</button>';
+    domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
     domString += '</div>';
     if (messages[i].gif !== '') {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
@@ -78,8 +79,15 @@ const showTextArea = (e) => {
   }
 };
 
-const postEditComment = () => {
-
+const postEditComment = (e) => {
+  postButtonId = e.target.id;
+  for (let x = 0; x < messages.length; x += 1) {
+    if (postButtonId === `postEdit${messages[x].id}`) {
+      messages[x].message = $(e.target).prev().val();
+      messageDomStringBuilder();
+      $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
+    }
+  }
 };
 const addEditTextEventListener = () => {
   $(document).ready(() => {
@@ -95,7 +103,7 @@ const addDeleteBtnEventListener = () => {
 
 const addPostEditCommentEventListener = () => {
   $(document).ready(() => {
-    $('#displayMessage').on('click', 'postEdit', postEditComment);
+    $('#displayMessage').on('click', '.postEdit', postEditComment);
   });
 };
 
@@ -161,6 +169,7 @@ const getMessages = () => {
     })
     .catch(err => console.error(err));
 };
+
 
 export default {
   getMessages,

@@ -16,6 +16,7 @@ const init = () => {
   messages.userInfo();
   messages.addDeleteBtnEventListener();
   messages.addEditTextEventListener();
+  messages.addPostEditCommentEventListener();
   giphy.addEvents();
 };
 
