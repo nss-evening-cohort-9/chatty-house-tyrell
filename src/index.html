@@ -7,45 +7,58 @@
   <title>Chatty</title>
 </head>
 <body class="lightMode">
-  <header>
-    <div id="app">
-          <nav class="navbar navbar-dark bg-dark">
-            <div class="text-center"><h1 class="text-white">Chatty Tyrell</h1></div>
-            <div class="users nav-item dropdown btn-group dropleft">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <button class="btn btn-success"><h4>Users</h4></button>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                
-                <input type="radio" name="userName" id="mark" value="Mark">
-                <label for="mark">Mark</label><br>
-                
-                <input type="radio" name="userName" id="sean" value="Sean">
-                <label for="sean">Sean</label><br>
-                
-                <input type="radio" name="userName" id="greg" value="Greg">
-                <label for="greg">Greg</label><br>
-              </div>
-          </nav>
-        </div>
+  <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="text-center">
+      <h1 class="text-white">Chatty Tyrell</h1>
     </div>
-  </header>
-  <div id="displayMessage"></div>
-  <div id="darkOrLightModeDiv">
+    <div class="users nav-item dropdown btn-group dropleft">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-success"><h4>Users</h4></button>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
+        <label for="user0">Anonymous</label><br>
+
+        <input type="radio" class="userSelector" name="userName" id="user2" value="Mark">
+        <label for="user2">Mark</label><br>
+        
+        <input type="radio" class="userSelector" name="userName" id="user3" value="Sean">
+        <label for="user3">Sean</label><br>
+        
+        <input type="radio" class="userSelector" name="userName" id="user1" value="Greg">
+        <label for="user1">Greg</label><br>
+      </div>
+    </div>
+  </nav>
+  <div id="largeTextMode">
     <label class='switch'>
-      <input type="checkbox" id="darkOrLightMode">
+      <input type="checkbox" id="largeText">
       <span class="slider round"></span>
     </label>  
-    <p>Dark Mode</p>
-  </div>
-  <div id="displayMessage" class="lightModeMessages"></div>
-  <div id="addMessage">
-    <form id="messageSubmitForm" action="POST">
-      <input id="message-input" type="text" placeholder="Say Something!">
-      <button type="submit" id="messageSubmit" class="btn btn-success">Post</button>
-    </form>
+    <p>Large Text</p>
   </div>
   <button class="clear-button">Clear</button>
+  <div id="darkOrLightModeDiv">
+      <label class='switch'>
+        <input type="checkbox" id="darkOrLightMode">
+        <span class="slider round"></span>
+      </label>  
+      <p>Dark Mode</p>
+    </div>
+  <div id="displayMessage" class="lightModeMessages">
+
+  </div>
+  <div id="addMessage" class="container">
+    <div class="row">
+      <div id="postingAsDiv" class="col 12 col-md-3 offset-md-1 mt-3">
+        <p>You are now posting as:</p>
+        <p id="userPostingAs">Anonymous</p>
+      </div>
+      <form class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-1" id="messageSubmitForm" action="POST">
+        <input id="message-input" type="text" placeholder="Say Something!">
+        <button type="submit" id="messageSubmit" class="btn btn-success">Post</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>
