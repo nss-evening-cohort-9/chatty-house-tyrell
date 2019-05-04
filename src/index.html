@@ -76,11 +76,15 @@
             </button>
           </div>
           <div class="modal-body container">
-            <div class="row">
-              <div class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-1" id="gifSearchForm">
-                <input id="gifSearchBar" type="text" placeholder="Search for a gif">
-                <button type="submit" id="gifSearchBtn" class="btn btn-success">Search</button>
-              </div>
+            <div class="row justify-content-around">
+              <form action="GET" class="col-12 col-sm-10 col-lg-8 mb-2" id="gifSearchForm">
+                <div class="input-group">
+                  <input id="gifSearchBar" class="form-control"type="text" placeholder="Search with a keyword">
+                  <div class="input-group-append">
+                    <button type="submit" id="gifSearchBtn" class="btn btn-outline-success">Search</button>
+                  </div>
+                </div>
+              </form>
             </div>
             <div id="gifChoiceDiv" class="row justify-content-around">
 
@@ -88,7 +92,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="addGif" class="btn btn-primary"data-dismiss="modal" >Choose Gif</button>
+            <button type="button" id="confirmAddedGif" class="btn btn-primary"data-dismiss="modal" >Choose Gif</button>
           </div>
         </div>
       </div>

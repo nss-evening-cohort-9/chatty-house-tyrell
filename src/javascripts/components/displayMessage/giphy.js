@@ -7,7 +7,7 @@ const client = GphApiClient('WN02hZbCfnRHWoA2xxf2622pi7k6fmjB');
 const gifSearchBar = $('#gifSearchBar');
 const gifSearchBtn = $('#gifSearchBtn');
 const gifChoiceDiv = $('#gifChoiceDiv');
-const addGifBtn = $('#addGif');
+const addGifBtn = $('#confirmAddedGif');
 
 const gifChoices = [];
 let selectedGif = '';
@@ -26,15 +26,23 @@ const showGifChoices = () => {
       if (selectedGifId === gifChoices[i].id) {
         selectedGif = gifChoices[i];
         domString = '';
+        domString += '<div class="col-12 chosen-gif-div">';
         domString += '<h3> This is your chosen gif</h3>';
         domString += `<img id="${selectedGif.id}" class="selectedGifPreview" src="${selectedGif.images.fixed_width.url}" alt="${selectedGif.title}">`;
+        domString += '</div>';
         gifChoiceDiv.html(domString);
       }
     }
   });
 };
 
-const getGifChoices = () => {
+const addGif = () => {
+  $('#gifAddedBadge')[0].style.display = 'inline';
+};
+
+const getGifChoices = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   const searchValue = gifSearchBar[0].value;
   gifChoices.length = 0;
   client.search('gifs', { q: searchValue })
@@ -44,20 +52,21 @@ const getGifChoices = () => {
       });
       gifSearchBar[0].value = '';
       showGifChoices();
+      addGifBtn.on('click', addGif);
     })
     .catch((err) => {
       console.error(err);
     });
 };
 
-const addGif = () => {
-  $('#gifAddedBadge')[0].style.display = 'inline';
-  console.error(selectedGif, 'selected!');
-};
-
 const addEvents = () => {
   gifSearchBtn.on('click', getGifChoices);
-  addGifBtn.on('click', addGif);
 };
 
-export default { addEvents, selectedGif };
+const getSelectedGif = () => selectedGif;
+
+const clearSelectedGif = () => {
+  selectedGif = '';
+};
+
+export default { addEvents, getSelectedGif, clearSelectedGif };
