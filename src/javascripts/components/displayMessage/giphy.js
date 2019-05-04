@@ -17,7 +17,7 @@ const showGifChoices = () => {
   let domString = '';
   selectedGif = '';
   for (let i = 0; i < gifChoices.length; i += 1) {
-    domString += `<input id=${gifChoices[i].id} type="image" class="gifSelector" src="${gifChoices[i].images.fixed_width.url}" alt="${gifChoices[i].title}">`;
+    domString += `<input id=${gifChoices[i].id} type="image" class="gifSelector" src="${gifChoices[i].images.fixed_width_small.url}" alt="${gifChoices[i].title}">`;
   }
   gifChoiceDiv.append(domString);
   $('.gifSelector').on('click', (e) => {
@@ -27,7 +27,7 @@ const showGifChoices = () => {
         selectedGif = gifChoices[i];
         domString = '';
         domString += '<h3> This is your chosen gif</h3>';
-        domString += `<img id="${selectedGif.id}" class="selectedGifPreview" src="${selectedGif.images.original.url}" alt="${selectedGif.title}">`;
+        domString += `<img id="${selectedGif.id}" class="selectedGifPreview" src="${selectedGif.images.fixed_width.url}" alt="${selectedGif.title}">`;
         gifChoiceDiv.html(domString);
       }
     }
