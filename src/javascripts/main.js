@@ -5,6 +5,7 @@ import clear from './helpers/clear';
 import 'bootstrap';
 import '../styles/main.scss';
 import '../styles/_footer.scss';
+import giphy from './components/displayMessage/giphy';
 // import text from './components/displayMessage/textChanger';
 
 const init = () => {
@@ -14,6 +15,7 @@ const init = () => {
   clear.clearMessages();
   messages.userInfo();
   messages.addDeleteBtnEventListener();
+  giphy.addEvents();
 };
 
 init();

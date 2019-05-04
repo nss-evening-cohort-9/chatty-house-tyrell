@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
+import giphy from './giphy';
 import './_message.scss';
 
 const messageInput = $('#message-input');
@@ -15,6 +16,7 @@ const userInfoObject = [{
   name: 'ANONYMOUS',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
+
 
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
@@ -33,6 +35,9 @@ const messageDomStringBuilder = () => {
     }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
+    if (messages[i].gif !== '') {
+      domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
+    }
     domString += '</div>';
     domString += '</div>';
     domString += '<hr>';
@@ -84,6 +89,13 @@ const createMessageObject = () => {
   const newMessage = messageInput[0].value;
   const newTimeStamp = moment().format('lll');
   const messageId = commentCounter;
+  let selectedGif = '';
+  let gifAlternateText = '';
+  const theGif = giphy.getSelectedGif();
+  if (theGif !== '') {
+    selectedGif = theGif.images.fixed_width.url;
+    gifAlternateText = theGif.title;
+  }
   commentCounter += 1;
   const newMessageObject = {
     id: messageId,
@@ -91,10 +103,15 @@ const createMessageObject = () => {
     message: newMessage,
     timeStamp: newTimeStamp,
     image: userInfoObject[0].image,
+    gif: selectedGif,
+    gifAltText: gifAlternateText,
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';
   $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+  $('#gifAddedBadge')[0].style.display = 'none';
+  $('#gifChoiceDiv').empty();
+  giphy.clearSelectedGif();
   messageDomStringBuilder();
 };
 
