@@ -6,23 +6,29 @@
   height: 10em;
   background-color: black;
   @media (min-width: 768px) {
-    height: 5em;
+    height: 6em;
   }
   #messageSubmitForm {
     text-align: center;
+    margin-top: 1.75em;
     @media (min-width: 768px) {
       text-align: start;
+    }
+
+    #gifAddedBadge {
+      display: none;
     }
   }
   #postingAsDiv{
     line-height: .75em;
     text-align: center;
   }
-  #message-input {
-    width: 75%;
-    margin-right: 1em;
-    margin-top: 1.75em;
-  }
+    #message-input {
+      width: 70%;
+      // margin-right: 1em;
+      // margin-top: 1.75em;
+    }
+  
 }
 
 @media (min-width: 576px) {
