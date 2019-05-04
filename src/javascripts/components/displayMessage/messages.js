@@ -43,6 +43,7 @@ const messageDomStringBuilder = () => {
     domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
     domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
     domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
+    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
     domString += '</div>';
     if (messages[i].gif !== '') {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
