@@ -24,16 +24,26 @@ const userInfoObject = [
 
 const thumbBtnCheck = (btnId, messageId, user) => {
   const messId = parseInt(messageId, 10);
+  const messageIdArray = [];
   for (let i = 0; i < users.users.length; i += 1) {
     if (user === users.users[i].user.id) {
       for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
-        console.error('user mess id', users.users[i].user.thumbs[j].messageId, 'messId', messId);
-        if (users.users[i].user.thumbs[j].messageId === messId) {
-          console.error('matches messageId');
-        } else {
-          console.error('doesnt match message');
-        }
+        messageIdArray.push(users.users[i].user.thumbs[j].messageId);
       }
+      console.error('messArray', messageIdArray, 'messid', messId);
+      if (!messageIdArray.includes(messId)) {
+        console.error('doesnt include message id');
+      } else {
+        console.error('includes message id');
+      }
+      // else {
+      //   console.error('doesnt include');
+      //   if (users.users[i].user.thumbs[j].messageId === messId) {
+      //     console.error('matches messageId');
+      //   } else {
+      //     console.error('doesnt match message');
+      //   }
+      // }
       // switch (btnId) {
       //   case (btnId.indexOf('thumb-up') === 0):
       //     console.error('thumbs up!');

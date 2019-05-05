@@ -25,6 +25,10 @@ const users = [
           messageId: 5000,
           up: true,
           down: false,
+        }, {
+          messageId: 4000,
+          up: false,
+          down: true,
         },
       ],
     },
