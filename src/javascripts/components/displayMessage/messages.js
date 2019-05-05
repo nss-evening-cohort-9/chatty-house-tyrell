@@ -19,12 +19,28 @@ const userInfoObject = [
       name: 'Anonymous',
       image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
     },
-  }];
+  },
+];
 
 const thumbBtnCheck = (btnId, messageId, user) => {
+  const messId = parseInt(messageId, 10);
   for (let i = 0; i < users.users.length; i += 1) {
-    if (user === users.users.user.id) {
-      console.error(btnId.indexOf('thumb-up') === 0);
+    if (user === users.users[i].user.id) {
+      for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
+        console.error('user mess id', users.users[i].user.thumbs[j].messageId, 'messId', messId);
+        if (users.users[i].user.thumbs[j].messageId === messId) {
+          console.error('matches messageId');
+        } else {
+          console.error('doesnt match message');
+        }
+      }
+      // switch (btnId) {
+      //   case (btnId.indexOf('thumb-up') === 0):
+      //     console.error('thumbs up!');
+      //     break;
+      //   default:
+      //     console.error('what');
+      // }
       // let newVote = {
       //   message: messageId,
       //   up: true,
@@ -36,12 +52,10 @@ const thumbBtnCheck = (btnId, messageId, user) => {
 
 const addThumbUp = (e) => {
   const thumbUpId = e.currentTarget.id;
-  const message = $(thumbUpId).closest('.message');
-  console.error(message, 'mess');
+  const message = $(`#${thumbUpId}`).closest('.message');
   const messageId = message[0].id;
-  const user = userInfoObject[0].user.id;
+  const user = userInfoObject[0].id;
   thumbBtnCheck(thumbUpId, messageId, user);
-  console.error(e.target);
   for (let i = 0; i < messages.length; i += 1) {
     if (thumbUpId === `thumb-up-${messages[i].id}`) {
       messages[i].thumbsUp += 1;
@@ -51,12 +65,10 @@ const addThumbUp = (e) => {
 
 const addThumbDown = (e) => {
   const thumbDownId = e.currentTarget.id;
-  const message = $(thumbDownId).closest('.message');
+  const message = $(`#${thumbDownId}`).closest('.message');
   const messageId = message[0].id;
-  const user = userInfoObject[0].user.id;
+  const user = userInfoObject[0].id;
   thumbBtnCheck(thumbDownId, messageId, user);
-  console.error('messageId', messageId);
-  // thumbBtnCheck(thumbDownId);
   for (let i = 0; i < messages.length; i += 1) {
     if (thumbDownId === `thumb-down-${messages[i].id}`) {
       messages[i].thumbsDown += 1;

@@ -22,7 +22,7 @@ const users = [
       },
       thumbs: [
         {
-          messageId: 2,
+          messageId: 5000,
           up: true,
           down: false,
         },
