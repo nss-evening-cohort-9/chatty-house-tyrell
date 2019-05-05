@@ -6,15 +6,17 @@ import bigFont from './components/displayMessage/textChanger';
 import 'bootstrap';
 import '../styles/main.scss';
 import '../styles/_footer.scss';
+import giphy from './components/displayMessage/giphy';
 
 const init = () => {
+  bigFont.fontFlipper();
   messages.getMessages();
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
+  messages.userInfo();
   messages.addDeleteBtnEventListener();
-  bigFont.fontFlipper();
-  bigFont.nameFlipper();
+  giphy.addEvents();
 };
 
 init();

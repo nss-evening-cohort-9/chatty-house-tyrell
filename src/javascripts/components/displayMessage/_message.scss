@@ -3,14 +3,15 @@
 #displayMessage {
   width: 60%;
   margin: auto;
+  min-height: 30em;
 }
 .message {
-  min-height: 8em;
+  min-height: 6em;
   padding-top: .5em;
   .userImage {
     margin: 0.75em;
     border-radius: 50%;
-    max-width: 4em;
+    max-height: 3em;
   }
   .media-header {
     .timeStamp {

@@ -1,26 +1,13 @@
 import $ from 'jquery';
 
-const p = $('p').addClass('bigText');
-const h5 = $('h5').addClass('bigText');
+const fontSize = [22, 16];
 
 const fontFlipper = () => {
-  $('#largeText').click(() => {
-    if (p.hasClass('bigText')) {
-      $('p').toggleClass().css('font-size', '28px');
-    } else {
-      $('p').toggleClass().css('font-size', '16px');
-    }
+  $('input').click(() => {
+    $('p').css('font-size', fontSize[0]);
+    $('h5').css('font-size', fontSize[0]);
+    fontSize.reverse();
   });
 };
 
-const nameFlipper = () => {
-  $('#largeText').click(() => {
-    if (h5.hasClass('bigText')) {
-      $('h5').toggleClass().css('font-size', '28px');
-    } else {
-      $('h5').toggleClass().css('font-size', '16px');
-    }
-  });
-};
-
-export default { fontFlipper, nameFlipper };
+export default { fontFlipper };
