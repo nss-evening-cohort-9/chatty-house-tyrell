@@ -22,7 +22,11 @@ const userInfoObject = [
   },
 ];
 
-const thumbBtnCheck = (btnId, messageId, user) => {
+const thumbBtnCheck = (e) => {
+  const btnId = e.currentTarget.id;
+  const message = $(`#${btnId}`).closest('.message');
+  const messageId = message[0].id;
+  const user = userInfoObject[0].id;
   let upOrDownVote = '';
   // checks if btn pressed was up or down
   if ((btnId.indexOf('thumb-up') === 0)) {
@@ -77,41 +81,27 @@ const thumbBtnCheck = (btnId, messageId, user) => {
             }
           }
         }
-        console.error(users.users[i].user.thumbs);
+        console.error('changed vote', users.users[i].user.thumbs);
       }
     }
   }
 };
 
-const addThumbUp = (e) => {
-  const thumbUpId = e.currentTarget.id;
-  const message = $(`#${thumbUpId}`).closest('.message');
-  const messageId = message[0].id;
-  const user = userInfoObject[0].id;
-  thumbBtnCheck(thumbUpId, messageId, user);
-  for (let i = 0; i < messages.length; i += 1) {
-    if (thumbUpId === `thumb-up-${messages[i].id}`) {
-      messages[i].thumbsUp += 1;
-    }
-  }
-};
 
-const addThumbDown = (e) => {
-  const thumbDownId = e.currentTarget.id;
-  const message = $(`#${thumbDownId}`).closest('.message');
-  const messageId = message[0].id;
-  const user = userInfoObject[0].id;
-  thumbBtnCheck(thumbDownId, messageId, user);
-  for (let i = 0; i < messages.length; i += 1) {
-    if (thumbDownId === `thumb-down-${messages[i].id}`) {
-      messages[i].thumbsDown += 1;
-    }
-  }
-};
+/*
+NEED TO CREATE A NEW FUNCTION THAT
+  - searches thru the users array, specfically the thumbs array
+  - gathers the message ids and the votes related
+  - if the vote is up: true then it gets plus one in the up
+  - if the vote is down: true then it gets plus one in the down
+  - all this info should go into the votes array with an object for each message id
+  - then loop thru the votes array and add each number to the messages array for it to print
+  - ie messages[i].thumbsUp = votes.[i].up
+*/
 
 const addThumbEvents = () => {
-  $('.thumbs-up').on('click', addThumbUp);
-  $('.thumbs-down').on('click', addThumbDown);
+  $('.thumbs-up').on('click', thumbBtnCheck);
+  $('.thumbs-down').on('click', thumbBtnCheck);
 };
 
 
