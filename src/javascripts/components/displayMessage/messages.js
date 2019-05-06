@@ -22,6 +22,24 @@ const userInfoObject = [
   },
 ];
 
+// const tallyVotes = () => {
+//   for (let u = 0; u < users.users.length; u += 1) {
+//     for (let t = 0; t < users.users[u].thumbs; t += 1) {
+
+//     }
+//   }
+// };
+/*
+NEED TO CREATE A NEW FUNCTION THAT
+  - searches thru the users array, specfically the thumbs array
+  - gathers the message ids and the votes related
+  - if the vote is up: true then it gets plus one in the up
+  - if the vote is down: true then it gets plus one in the down
+  - all this info should go into the votes array with an object for each message id
+  - then loop thru the votes array and add each number to the messages array for it to print
+  - ie messages[i].thumbsUp = votes.[i].up
+*/
+
 const thumbBtnCheck = (e) => {
   const btnId = e.currentTarget.id;
   const message = $(`#${btnId}`).closest('.message');
@@ -43,7 +61,6 @@ const thumbBtnCheck = (e) => {
         // creates an array of objects of that users previously clicked on message ids
         messageIdArray.push(users.users[i].user.thumbs[j].messageId);
       }
-      console.error('messArray', messageIdArray, 'messid', messId);
       // checks to see if user previously voted on message, if not then creates a new object
       if (!messageIdArray.includes(messId)) {
         const newVote = {
@@ -57,9 +74,9 @@ const thumbBtnCheck = (e) => {
         } else {
           newVote.down = true;
         }
+        // adds new vote object to the users object
         users.users[i].user.thumbs.push(newVote);
         console.error('updated array', users.users[i].user.thumbs);
-        console.error('doesnt include message id', newVote);
       } else {
         // since they voted already, finds the message in their thumbs array
         for (let k = 0; k < users.users[i].user.thumbs.length; k += 1) {
@@ -70,14 +87,14 @@ const thumbBtnCheck = (e) => {
               if (users.users[i].user.thumbs[k].up === false) {
                 users.users[i].user.thumbs[k].up = true;
                 users.users[i].user.thumbs[k].down = false;
-              }
+              } // else does nothing because they already voted up
               // if they voted down
             } else if (upOrDownVote === 'down') {
               // if the old vote was up, changes the down to true and up to false
               if (users.users[i].user.thumbs[k].down === false) {
                 users.users[i].user.thumbs[k].down = true;
                 users.users[i].user.thumbs[k].up = false;
-              }
+              } // else does nothing because they already voted down
             }
           }
         }
@@ -85,19 +102,8 @@ const thumbBtnCheck = (e) => {
       }
     }
   }
+  // tallyVotes();
 };
-
-
-/*
-NEED TO CREATE A NEW FUNCTION THAT
-  - searches thru the users array, specfically the thumbs array
-  - gathers the message ids and the votes related
-  - if the vote is up: true then it gets plus one in the up
-  - if the vote is down: true then it gets plus one in the down
-  - all this info should go into the votes array with an object for each message id
-  - then loop thru the votes array and add each number to the messages array for it to print
-  - ie messages[i].thumbsUp = votes.[i].up
-*/
 
 const addThumbEvents = () => {
   $('.thumbs-up').on('click', thumbBtnCheck);
