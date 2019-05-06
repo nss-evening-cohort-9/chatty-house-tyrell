@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
+import votes from '../votes';
 import giphy from './giphy';
 import './_message.scss';
 
@@ -54,6 +55,43 @@ const thumbBtnCheck = (e) => {
   }
   const messId = parseInt(messageId, 10);
   const messageIdArray = [];
+  // gets the object that has the message id and the user id
+  const msgVotedOn = votes.votes.filter(vote => vote.userId === user && vote.messageId === messId);
+  console.error('combinedArray', msgVotedOn);
+  console.error('votes', votes.votes);
+  const index = votes.votes.indexOf(msgVotedOn[0]);
+  console.error('index', index);
+  // if it doesn't exist, create a new object to push to votes array
+  if (msgVotedOn.length === 0) {
+    const newThumb = {
+      userId: user,
+      messageId: messId,
+      up: false,
+      down: false,
+    };
+    // checks whether they voted up or down and changes vote on new object
+    if (upOrDownVote === 'up') {
+      newThumb.up = true;
+    } else {
+      newThumb.down = true;
+    }
+    console.error('newTHumb', newThumb);
+    votes.votes.push(newThumb);
+    console.error('should be pushed', votes.votes);
+  } else if (upOrDownVote === 'up') {
+    if (!msgVotedOn[0].up) {
+      msgVotedOn[0].up = true;
+      msgVotedOn[0].down = false;
+    }
+  } else if (upOrDownVote === 'down') {
+    if (!msgVotedOn[0].down) {
+      msgVotedOn[0].down = true;
+      msgVotedOn[0].up = false;
+    }
+  }
+  votes.votes.splice(index, 1, msgVotedOn[0]);
+  console.error('messageVotedOn', msgVotedOn[0]);
+  console.error('updated', votes.votes);
   // gets the user info for the user that clicked the button
   for (let i = 0; i < users.users.length; i += 1) {
     if (user === users.users[i].user.id) {
