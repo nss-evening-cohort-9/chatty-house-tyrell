@@ -23,39 +23,62 @@ const userInfoObject = [
 ];
 
 const thumbBtnCheck = (btnId, messageId, user) => {
+  let upOrDownVote = '';
+  // checks if btn pressed was up or down
+  if ((btnId.indexOf('thumb-up') === 0)) {
+    upOrDownVote = 'up';
+  } else {
+    upOrDownVote = 'down';
+  }
   const messId = parseInt(messageId, 10);
   const messageIdArray = [];
+  // gets the user info for the user that clicked the button
   for (let i = 0; i < users.users.length; i += 1) {
     if (user === users.users[i].user.id) {
       for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
+        // creates an array of objects of that users previously clicked on message ids
         messageIdArray.push(users.users[i].user.thumbs[j].messageId);
       }
       console.error('messArray', messageIdArray, 'messid', messId);
+      // checks to see if user previously voted on message, if not then creates a new object
       if (!messageIdArray.includes(messId)) {
-        console.error('doesnt include message id');
+        const newVote = {
+          messageId: messId,
+          up: false,
+          down: false,
+        };
+        // checks whether they voted up or down and changes vote on new object
+        if (upOrDownVote === 'up') {
+          newVote.up = true;
+        } else {
+          newVote.down = true;
+        }
+        users.users[i].user.thumbs.push(newVote);
+        console.error('updated array', users.users[i].user.thumbs);
+        console.error('doesnt include message id', newVote);
       } else {
-        console.error('includes message id');
+        // since they voted already, finds the message in their thumbs array
+        for (let k = 0; k < users.users[i].user.thumbs.length; k += 1) {
+          if (users.users[i].user.thumbs[k].messageId === messId) {
+            // if they voted up
+            if (upOrDownVote === 'up') {
+              // if the old vote was down, changes the up to true and the down to false
+              if (users.users[i].user.thumbs[k].up === false) {
+                users.users[i].user.thumbs[k].up = true;
+                users.users[i].user.thumbs[k].down = false;
+              }
+              // if they voted down
+            } else if (upOrDownVote === 'down') {
+              // if the old vote was up, changes the down to true and up to false
+              if (users.users[i].user.thumbs[k].down === false) {
+                users.users[i].user.thumbs[k].down = true;
+                users.users[i].user.thumbs[k].up = false;
+              }
+            }
+          }
+        }
+        console.error(users.users[i].user.thumbs);
       }
-      // else {
-      //   console.error('doesnt include');
-      //   if (users.users[i].user.thumbs[j].messageId === messId) {
-      //     console.error('matches messageId');
-      //   } else {
-      //     console.error('doesnt match message');
-      //   }
-      // }
-      // switch (btnId) {
-      //   case (btnId.indexOf('thumb-up') === 0):
-      //     console.error('thumbs up!');
-      //     break;
-      //   default:
-      //     console.error('what');
-      // }
-      // let newVote = {
-      //   message: messageId,
-      //   up: true,
-      //   down: false,
-      // }
     }
   }
 };
