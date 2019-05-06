@@ -83,13 +83,14 @@ const thumbBtnCheck = (e) => {
       msgVotedOn[0].up = true;
       msgVotedOn[0].down = false;
     }
+    votes.votes.splice(index, 1, msgVotedOn[0]);
   } else if (upOrDownVote === 'down') {
     if (!msgVotedOn[0].down) {
       msgVotedOn[0].down = true;
       msgVotedOn[0].up = false;
     }
+    votes.votes.splice(index, 1, msgVotedOn[0]);
   }
-  votes.votes.splice(index, 1, msgVotedOn[0]);
   console.error('messageVotedOn', msgVotedOn[0]);
   console.error('updated', votes.votes);
   // gets the user info for the user that clicked the button
