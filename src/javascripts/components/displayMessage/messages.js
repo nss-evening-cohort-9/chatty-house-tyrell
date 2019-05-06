@@ -3,6 +3,7 @@ import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
 import giphy from './giphy';
 import './_message.scss';
+import './textChanger';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
