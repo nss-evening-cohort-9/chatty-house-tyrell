@@ -85,8 +85,9 @@ const postEditComment = (e) => {
   for (let x = 0; x < messages.length; x += 1) {
     if (postButtonId === `postEdit${messages[x].id}`) {
       messages[x].message = $(e.target).prev().val();
+      messages[x].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
-      $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
+      // $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
     }
   }
 };
