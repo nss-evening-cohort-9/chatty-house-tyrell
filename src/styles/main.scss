@@ -10,7 +10,7 @@
   @include darkModeBody;
 }
 
-#bigFontModeDiv {
+#bigModeDiv {
   @include sliderButton;
 }
 
@@ -26,9 +26,13 @@ hr{
 }
 
 .largeMode {
-  font-size: 16px;
+  font-size: 32px;
 }
 
 .regMode {
   font-size: 16px;
 }
+
+// .notAvail {
+
+// }
