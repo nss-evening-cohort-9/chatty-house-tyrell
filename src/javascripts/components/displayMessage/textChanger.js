@@ -1,12 +1,17 @@
 import $ from 'jquery';
 
-const fontSize = [22, 16];
+const body = $('body');
 
-const fontFlipper = () => {
-  $('clear-button').click(() => {
-    $('p').css('font-size', fontSize[0]);
-    fontSize.reverse();
+const fontToggleEvent = () => {
+  $('#largeSize').click(() => {
+    if (body.hasClass('largeMode')) {
+      body.removeClass('regMode');
+      body.addClass('largeMode');
+    } else {
+      body.removeClass('largeMode');
+      body.addClass('regMode');
+    }
   });
 };
 
-export default { fontFlipper };
+export default { fontToggleEvent };

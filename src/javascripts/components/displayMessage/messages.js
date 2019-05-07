@@ -131,5 +131,4 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
-
 };
