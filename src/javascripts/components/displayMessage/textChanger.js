@@ -1,11 +1,17 @@
 import $ from 'jquery';
 
-const p = $('p').addClass('bigText');
+const body = $('div');
 
-$('#largeText').click(() => {
-  if (p.hasClass('bigText')) {
-    $('p').toggleClass().css('font-size', '32px');
-  } else {
-    $('p').toggleClass().css('font-size', '16px');
-  }
-});
+const fontToggleEvent = () => {
+  $('#largeSize').click(() => {
+    if (body.hasClass('largeMode')) {
+      body.removeClass('largeMode');
+      body.addClass('regMode');
+    } else {
+      body.removeClass('regMode');
+      body.addClass('largeMode');
+    }
+  });
+};
+
+export default { fontToggleEvent };

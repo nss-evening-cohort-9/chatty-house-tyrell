@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chatty</title>
 </head>
-<body class="lightMode">
+<body class="lightMode" id="largeText">
   <nav class="navbar fixed-top navbar-dark bg-dark">
     <div class="text-center">
       <h1 class="text-white">Chatty Tyrell</h1>
@@ -30,21 +30,25 @@
       </div>
     </div>
   </nav>
-  <div id="largeTextMode">
+
+  <button class="btn btn-warning clear-button">Clear</button>
+
+  <div id="darkOrLightModeDiv">
     <label class='switch'>
-      <input type="checkbox" id="largeText">
+      <input type="checkbox" id="darkOrLightMode">
+      <span class="slider round"></span>
+    </label>  
+    <p>Dark Mode</p>
+  </div>
+
+  <div id="bigModeDiv">
+    <label class='switch'>
+      <input type="checkbox" id="largeSize">
       <span class="slider round"></span>
     </label>  
     <p>Large Text</p>
   </div>
-  <button class="clear-button">Clear</button>
-  <div id="darkOrLightModeDiv">
-      <label class='switch'>
-        <input type="checkbox" id="darkOrLightMode">
-        <span class="slider round"></span>
-      </label>  
-      <p>Dark Mode</p>
-    </div>
+
   <div id="displayMessage" class="lightModeMessages">
 
   </div>

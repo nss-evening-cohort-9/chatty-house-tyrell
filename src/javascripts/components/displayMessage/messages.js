@@ -3,6 +3,7 @@ import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
 import giphy from './giphy';
 import './_message.scss';
+import './textChanger';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
@@ -17,7 +18,6 @@ const userInfoObject = [{
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
 
-
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
@@ -28,7 +28,7 @@ const messageDomStringBuilder = () => {
     domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
-    domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
+    domString += `<h5 class="userName mt-0 col-auto" >${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
     if (messages[i].username === userInfoObject[0].name) {
       domString += `<button id = "${messages[i].id}" class=" deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
@@ -131,5 +131,4 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
-
 };
