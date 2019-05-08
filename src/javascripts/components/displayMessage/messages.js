@@ -23,13 +23,14 @@ const userInfoObject = [
   },
 ];
 
-// const tallyVotes = () => {
-//   for (let u = 0; u < users.users.length; u += 1) {
-//     for (let t = 0; t < users.users[u].thumbs; t += 1) {
+const tallyVotes = () => {
+  messages.forEach((message) => {
+    const messageVotes = votes.votes.filter(msg => msg.messageId === message.id);
+    message.upTotal = messageVotes.filter(msg => msg.up === true).length;
+    message.downTotal = messageVotes.filter(msg => msg.down === true).length;
+  });
+};
 
-//     }
-//   }
-// };
 /*
 NEED TO CREATE A NEW FUNCTION THAT
   - searches thru the users array, specfically the thumbs array
@@ -54,7 +55,6 @@ const thumbBtnCheck = (e) => {
     upOrDownVote = 'down';
   }
   const messId = parseInt(messageId, 10);
-  const messageIdArray = [];
   // gets the object that has the message id and the user id
   const msgVotedOn = votes.votes.filter(vote => vote.userId === user && vote.messageId === messId);
   console.error('combinedArray', msgVotedOn);
@@ -94,54 +94,7 @@ const thumbBtnCheck = (e) => {
   console.error('messageVotedOn', msgVotedOn[0]);
   console.error('updated', votes.votes);
   // gets the user info for the user that clicked the button
-  for (let i = 0; i < users.users.length; i += 1) {
-    if (user === users.users[i].user.id) {
-      for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
-        // creates an array of objects of that users previously clicked on message ids
-        messageIdArray.push(users.users[i].user.thumbs[j].messageId);
-      }
-      // checks to see if user previously voted on message, if not then creates a new object
-      if (!messageIdArray.includes(messId)) {
-        const newVote = {
-          messageId: messId,
-          up: false,
-          down: false,
-        };
-        // checks whether they voted up or down and changes vote on new object
-        if (upOrDownVote === 'up') {
-          newVote.up = true;
-        } else {
-          newVote.down = true;
-        }
-        // adds new vote object to the users object
-        users.users[i].user.thumbs.push(newVote);
-        console.error('updated array', users.users[i].user.thumbs);
-      } else {
-        // since they voted already, finds the message in their thumbs array
-        for (let k = 0; k < users.users[i].user.thumbs.length; k += 1) {
-          if (users.users[i].user.thumbs[k].messageId === messId) {
-            // if they voted up
-            if (upOrDownVote === 'up') {
-              // if the old vote was down, changes the up to true and the down to false
-              if (users.users[i].user.thumbs[k].up === false) {
-                users.users[i].user.thumbs[k].up = true;
-                users.users[i].user.thumbs[k].down = false;
-              } // else does nothing because they already voted up
-              // if they voted down
-            } else if (upOrDownVote === 'down') {
-              // if the old vote was up, changes the down to true and up to false
-              if (users.users[i].user.thumbs[k].down === false) {
-                users.users[i].user.thumbs[k].down = true;
-                users.users[i].user.thumbs[k].up = false;
-              } // else does nothing because they already voted down
-            }
-          }
-        }
-        console.error('changed vote', users.users[i].user.thumbs);
-      }
-    }
-  }
-  // tallyVotes();
+  tallyVotes();
 };
 
 const addThumbEvents = () => {
@@ -290,3 +243,52 @@ export default {
   addDeleteBtnEventListener,
   addThumbEvents,
 };
+
+// const messageIdArray = [];
+// for (let i = 0; i < users.users.length; i += 1) {
+//   if (user === users.users[i].user.id) {
+//     for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
+//       // creates an array of objects of that users previously clicked on message ids
+//       messageIdArray.push(users.users[i].user.thumbs[j].messageId);
+//     }
+//     // checks to see if user previously voted on message, if not then creates a new object
+//     if (!messageIdArray.includes(messId)) {
+//       const newVote = {
+//         messageId: messId,
+//         up: false,
+//         down: false,
+//       };
+//       // checks whether they voted up or down and changes vote on new object
+//       if (upOrDownVote === 'up') {
+//         newVote.up = true;
+//       } else {
+//         newVote.down = true;
+//       }
+//       // adds new vote object to the users object
+//       users.users[i].user.thumbs.push(newVote);
+//       console.error('updated array', users.users[i].user.thumbs);
+//     } else {
+//       // since they voted already, finds the message in their thumbs array
+//       for (let k = 0; k < users.users[i].user.thumbs.length; k += 1) {
+//         if (users.users[i].user.thumbs[k].messageId === messId) {
+//           // if they voted up
+//           if (upOrDownVote === 'up') {
+//             // if the old vote was down, changes the up to true and the down to false
+//             if (users.users[i].user.thumbs[k].up === false) {
+//               users.users[i].user.thumbs[k].up = true;
+//               users.users[i].user.thumbs[k].down = false;
+//             } // else does nothing because they already voted up
+//             // if they voted down
+//           } else if (upOrDownVote === 'down') {
+//             // if the old vote was up, changes the down to true and up to false
+//             if (users.users[i].user.thumbs[k].down === false) {
+//               users.users[i].user.thumbs[k].down = true;
+//               users.users[i].user.thumbs[k].up = false;
+//             } // else does nothing because they already voted down
+//           }
+//         }
+//       }
+//       console.error('changed vote', users.users[i].user.thumbs);
+//     }
+//   }
+// }
