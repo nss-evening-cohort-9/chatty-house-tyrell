@@ -1,0 +1,25 @@
+{
+  "emojis":
+  {
+    ":hamburger:" : "&#x1F354",
+    ":watermelon:" : "&#x1F349",
+    ":avacado:" : "&#x1F951",
+    ":grinning:" : "&#x1F600",
+    ":grin:" : "&#x1F601",
+    ":smiley:" : "&#x1F603",
+    ":smile:" : "&#x1F604",
+    ":sweat_smile:" : "&#x1F605",
+    ":laughing:" : "&#x1F606",
+    ":rofl:" : "&#x1F923",
+    ":joy:" : "&#x1F602",
+    ":wink:" : "&#x1F609",
+    ":heart_eyes:" : "&#x1F60D",
+    ":kissing_heart:" : "&#x1F618",
+    ":eyeroll:" : "&#x1F644",
+    ":grimacing:" : "&#x1F62C",
+    ":cry:" : "&#x1F622",
+    ":skull:" : "&#x1F480",
+    ":poop:" : "&#x1F4A9",
+    ":shit:" : "&#x1F4A9"
+  }
+}
