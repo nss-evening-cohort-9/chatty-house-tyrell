@@ -15,6 +15,7 @@ const init = () => {
   clear.clearMessages();
   messages.userInfo();
   messages.addDeleteBtnEventListener();
+  messages.disableClr();
   giphy.addEvents();
   big.fontToggleEvent();
 };
