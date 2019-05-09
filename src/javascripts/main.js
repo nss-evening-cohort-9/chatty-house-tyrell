@@ -10,6 +10,7 @@ import giphy from './components/displayMessage/giphy';
 
 const init = () => {
   messages.getMessages();
+  messages.getEmojis();
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
