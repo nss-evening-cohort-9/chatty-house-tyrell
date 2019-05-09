@@ -5,6 +5,7 @@ import votes from '../votes';
 import giphy from './giphy';
 import './_message.scss';
 
+
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
@@ -24,23 +25,25 @@ const userInfoObject = [
 ];
 
 const tallyVotes = () => {
+  const messagesUpDown = [];
   messages.forEach((message) => {
     const messageVotes = votes.votes.filter(msg => msg.messageId === message.id);
-    message.upTotal = messageVotes.filter(msg => msg.up === true).length;
-    message.downTotal = messageVotes.filter(msg => msg.down === true).length;
+    const messageWithUpDown = Object.create(message);
+    messageWithUpDown.id = message.id;
+    messageWithUpDown.upTotal = messageVotes.filter(msg => msg.up).length;
+    messageWithUpDown.downTotal = messageVotes.filter(msg => msg.down).length;
+    console.error('mwud', messageWithUpDown);
+    messagesUpDown.push(messageWithUpDown);
   });
+  messagesUpDown.forEach((messUpDown) => {
+    if (messUpDown.id === messages.id) {
+      console.error('hello');
+      messages.thumbsUp = messUpDown.upTotal;
+      messages.thumbsDown = messUpDown.downTotal;
+    }
+  });
+  console.error(messages);
 };
-
-/*
-NEED TO CREATE A NEW FUNCTION THAT
-  - searches thru the users array, specfically the thumbs array
-  - gathers the message ids and the votes related
-  - if the vote is up: true then it gets plus one in the up
-  - if the vote is down: true then it gets plus one in the down
-  - all this info should go into the votes array with an object for each message id
-  - then loop thru the votes array and add each number to the messages array for it to print
-  - ie messages[i].thumbsUp = votes.[i].up
-*/
 
 const thumbBtnCheck = (e) => {
   const btnId = e.currentTarget.id;
@@ -57,10 +60,7 @@ const thumbBtnCheck = (e) => {
   const messId = parseInt(messageId, 10);
   // gets the object that has the message id and the user id
   const msgVotedOn = votes.votes.filter(vote => vote.userId === user && vote.messageId === messId);
-  console.error('combinedArray', msgVotedOn);
-  console.error('votes', votes.votes);
   const index = votes.votes.indexOf(msgVotedOn[0]);
-  console.error('index', index);
   // if it doesn't exist, create a new object to push to votes array
   if (msgVotedOn.length === 0) {
     const newThumb = {
@@ -75,9 +75,7 @@ const thumbBtnCheck = (e) => {
     } else {
       newThumb.down = true;
     }
-    console.error('newTHumb', newThumb);
     votes.votes.push(newThumb);
-    console.error('should be pushed', votes.votes);
   } else if (upOrDownVote === 'up') {
     if (!msgVotedOn[0].up) {
       msgVotedOn[0].up = true;
@@ -91,9 +89,6 @@ const thumbBtnCheck = (e) => {
     }
     votes.votes.splice(index, 1, msgVotedOn[0]);
   }
-  console.error('messageVotedOn', msgVotedOn[0]);
-  console.error('updated', votes.votes);
-  // gets the user info for the user that clicked the button
   tallyVotes();
 };
 
