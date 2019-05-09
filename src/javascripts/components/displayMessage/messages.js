@@ -13,6 +13,14 @@ const moment = require('moment');
 
 let buttonId = '';
 
+const disableClr = () => {
+  if ($('#displayMessage').html() === '') {
+    $('.clear-button').attr('disabled', true);
+  } else {
+    $('.clear-button').attr('disabled', false);
+  }
+};
+
 const userInfoObject = [{
   name: 'ANONYMOUS',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
@@ -43,6 +51,7 @@ const messageDomStringBuilder = () => {
     domString += '<hr>';
     $('#displayMessage').prepend(domString);
   }
+  disableClr();
 };
 
 const deleteMessage = (e) => {
@@ -67,6 +76,7 @@ const keepClear = () => {
   messages = [];
   messageDomStringBuilder();
 };
+
 
 const postingAs = () => {
   const username = userInfoObject[0].name;
@@ -131,4 +141,5 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
+  disableClr,
 };
