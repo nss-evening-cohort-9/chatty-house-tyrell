@@ -20,6 +20,20 @@
     ":cry:" : "&#x1F622",
     ":skull:" : "&#x1F480",
     ":poop:" : "&#x1F4A9",
-    ":shit:" : "&#x1F4A9"
+    ":shit:" : "&#x1F4A9",
+    ":silly:" : "&#x1F643",
+    ":upside_down:" : "&#x1F643",
+    ":confused:" : "&#x1F615",
+    ":dizzy_face:" : "&#x1F635",
+    ":astonished:" : "&#x1F632",
+    ":anguished:" : "&#x1F627",
+    ":disappointed:" : "&#x1F61E",
+    ":scream:" : "&#x1F631",
+    ":clown:" : "&#x1F921",
+    ":fearful:" : "&#x1F628",
+    ":flushed:" : "&#x1F633",
+    ":drooling:" : "&#x1F924",
+    ":zany:" : "&#x1F92A",
+    ":yum:" : "&#x1F60B"
   }
 }
