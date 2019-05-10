@@ -7,7 +7,6 @@ import emoji from '../../helpers/data/getEmojiData';
 import './_message.scss';
 import './textChanger';
 
-
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
@@ -337,52 +336,3 @@ export default {
   addPostEditCommentEventListener,
   disableClr,
 };
-
-// const messageIdArray = [];
-// for (let i = 0; i < users.users.length; i += 1) {
-//   if (user === users.users[i].user.id) {
-//     for (let j = 0; j < users.users[i].user.thumbs.length; j += 1) {
-//       // creates an array of objects of that users previously clicked on message ids
-//       messageIdArray.push(users.users[i].user.thumbs[j].messageId);
-//     }
-//     // checks to see if user previously voted on message, if not then creates a new object
-//     if (!messageIdArray.includes(messId)) {
-//       const newVote = {
-//         messageId: messId,
-//         up: false,
-//         down: false,
-//       };
-//       // checks whether they voted up or down and changes vote on new object
-//       if (upOrDownVote === 'up') {
-//         newVote.up = true;
-//       } else {
-//         newVote.down = true;
-//       }
-//       // adds new vote object to the users object
-//       users.users[i].user.thumbs.push(newVote);
-//       console.error('updated array', users.users[i].user.thumbs);
-//     } else {
-//       // since they voted already, finds the message in their thumbs array
-//       for (let k = 0; k < users.users[i].user.thumbs.length; k += 1) {
-//         if (users.users[i].user.thumbs[k].messageId === messId) {
-//           // if they voted up
-//           if (upOrDownVote === 'up') {
-//             // if the old vote was down, changes the up to true and the down to false
-//             if (users.users[i].user.thumbs[k].up === false) {
-//               users.users[i].user.thumbs[k].up = true;
-//               users.users[i].user.thumbs[k].down = false;
-//             } // else does nothing because they already voted up
-//             // if they voted down
-//           } else if (upOrDownVote === 'down') {
-//             // if the old vote was up, changes the down to true and up to false
-//             if (users.users[i].user.thumbs[k].down === false) {
-//               users.users[i].user.thumbs[k].down = true;
-//               users.users[i].user.thumbs[k].up = false;
-//             } // else does nothing because they already voted down
-//           }
-//         }
-//       }
-//       console.error('changed vote', users.users[i].user.thumbs);
-//     }
-//   }
-// }
