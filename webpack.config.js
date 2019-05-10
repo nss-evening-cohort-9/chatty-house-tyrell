@@ -52,7 +52,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    })
+    }),
   ],
   output: {
 		path: __dirname + "/build",
