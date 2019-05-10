@@ -4,6 +4,7 @@ import users from '../user';
 import votes from '../votes';
 import giphy from './giphy';
 import './_message.scss';
+import './textChanger';
 
 
 const messageInput = $('#message-input');
@@ -13,6 +14,16 @@ const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
 let buttonId = '';
+let buttonId1 = '';
+let postButtonId = '';
+
+const disableClr = () => {
+  if ($('#displayMessage').html() === '') {
+    $('.clear-button').attr('disabled', true);
+  } else {
+    $('.clear-button').attr('disabled', false);
+  }
+};
 
 const userInfoObject = [
   {
@@ -97,7 +108,6 @@ const addThumbEvents = () => {
   $('.thumbs-down').on('click', thumbBtnCheck);
 };
 
-
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
@@ -108,13 +118,21 @@ const messageDomStringBuilder = () => {
     domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
-    domString += `<h5 class="userName mt-0 col-auto">${messages[i].username}</h5>`;
+    domString += `<h5 class="userName mt-0 col-auto" >${messages[i].username}</h5>`;
     domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
     if (messages[i].username === userInfoObject[0].info.name) {
       domString += `<button id="${messages[i].id}" class="deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
     }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
+    domString += '<div class = "editText">';
+    domString += `<button id = "edit${messages[i].id}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
+    domString += '</div>';
+    domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
+    domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
+    domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
+    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
+    domString += '</div>';
     if (messages[i].gif !== '') {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
     }
@@ -145,6 +163,7 @@ const messageDomStringBuilder = () => {
     $('#displayMessage').prepend(domString);
   }
   addThumbEvents();
+  disableClr();
 };
 
 const deleteMessage = (e) => {
@@ -153,10 +172,40 @@ const deleteMessage = (e) => {
     if (e.target.classList.contains('delete')) {
       if (buttonId === `${message.id}`) {
         messages.splice(index, 1);
+        messageDomStringBuilder();
       }
     }
   });
-  messageDomStringBuilder();
+};
+
+const showTextArea = (e) => {
+  buttonId1 = e.target.id;
+  for (let i = 0; i < messages.length; i += 1) {
+    if (buttonId1 === `edit${messages[i].id}`) {
+      messages[i].hideOrShowEdit = 'shown';
+      messageDomStringBuilder();
+    } else {
+      messages[i].hideOrShowEdit = 'hidden';
+      messageDomStringBuilder();
+    }
+  }
+};
+
+const postEditComment = (e) => {
+  postButtonId = e.target.id;
+  for (let x = 0; x < messages.length; x += 1) {
+    if (postButtonId === `postEdit${messages[x].id}`) {
+      messages[x].message = $(e.target).prev().val();
+      messages[x].hideOrShowEdit = 'hidden';
+      messageDomStringBuilder();
+      // $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
+    }
+  }
+};
+const addEditTextEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').on('click', '.edit', showTextArea);
+  });
 };
 
 const addDeleteBtnEventListener = () => {
@@ -165,10 +214,17 @@ const addDeleteBtnEventListener = () => {
   });
 };
 
+const addPostEditCommentEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').on('click', '.postEdit', postEditComment);
+  });
+};
+
 const keepClear = () => {
   messages = [];
   messageDomStringBuilder();
 };
+
 
 const postingAs = () => {
   const username = userInfoObject[0].info.name;
@@ -206,6 +262,7 @@ const createMessageObject = () => {
     message: newMessage,
     timeStamp: newTimeStamp,
     image: userInfoObject[0].info.image,
+    hideOrShowEdit: 'hidden',
     gif: selectedGif,
     gifAltText: gifAlternateText,
     thumbsUp: 0,
@@ -237,6 +294,9 @@ export default {
   userInfo,
   addDeleteBtnEventListener,
   addThumbEvents,
+  addEditTextEventListener,
+  addPostEditCommentEventListener,
+  disableClr,
 };
 
 // const messageIdArray = [];

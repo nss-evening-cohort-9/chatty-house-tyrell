@@ -1,21 +1,24 @@
-import messages from './components/displayMessage/messages';
+import messageInfo from './components/displayMessage/messages';
 import themeChange from './components/themeChanger';
 import addMessage from './components/addMessage';
 import clear from './helpers/clear';
+import big from './components/displayMessage/textChanger';
 import 'bootstrap';
 import '../styles/main.scss';
 import '../styles/_footer.scss';
 import giphy from './components/displayMessage/giphy';
-// import text from './components/displayMessage/textChanger';
 
 const init = () => {
-  messages.getMessages();
+  messageInfo.getMessages();
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
-  messages.userInfo();
-  messages.addDeleteBtnEventListener();
+  messageInfo.userInfo();
+  messageInfo.addDeleteBtnEventListener();
+  messageInfo.addEditTextEventListener();
+  messageInfo.addPostEditCommentEventListener();
   giphy.addEvents();
+  big.fontToggleEvent();
 };
 
 init();
