@@ -88,6 +88,9 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += '<div class="font-weight-normal messageContent col-12">';
     domString += `<p>${messagesUpDown[i].message}</p>`;
+    if (messagesUpDown[i].gif !== '') {
+      domString += `<img src="${messagesUpDown[i].gif}" alt="${messagesUpDown[i].gifAltText}">`;
+    }
     domString += '</div>';
     domString += `<div class="${messagesUpDown[i].hideOrShowEdit} editForm">`;
     domString += `<textarea id="textArea" rows="4" cols="50">${messagesUpDown[i].message}</textarea>`;
@@ -115,9 +118,6 @@ const messageDomStringBuilder = () => {
     domString += '<span class="sr-only">Thumbs Downs</span>';
     domString += '</button>';
     // domString += '</div>';
-    if (messagesUpDown[i].gif !== '') {
-      domString += `<img src="${messagesUpDown[i].gif}" alt="${messagesUpDown[i].gifAltText}">`;
-    }
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
