@@ -20,17 +20,7 @@ const users = [
         name: 'gerG',
         image: greg,
       },
-      thumbs: [
-        {
-          messageId: 5000,
-          up: true,
-          down: false,
-        }, {
-          messageId: 4000,
-          up: false,
-          down: true,
-        },
-      ],
+      thumbs: [],
     },
   }, {
     user: {
@@ -48,7 +38,7 @@ const users = [
         name: 'naeS',
         image: sean,
       },
-      thumbs: '',
+      thumbs: [],
     },
   },
 ];

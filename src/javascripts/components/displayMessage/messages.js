@@ -161,12 +161,16 @@ const thumbBtnCheck = (e) => {
     if (!msgVotedOn[0].up) {
       msgVotedOn[0].up = true;
       msgVotedOn[0].down = false;
+    } else if (msgVotedOn[0].up === true && msgVotedOn[0].down === false) {
+      msgVotedOn[0].up = false;
     }
     votes.votes.splice(index, 1, msgVotedOn[0]);
   } else if (upOrDownVote === 'down') {
     if (!msgVotedOn[0].down) {
       msgVotedOn[0].down = true;
       msgVotedOn[0].up = false;
+    } else if (msgVotedOn[0].down === true && msgVotedOn[0].up === false) {
+      msgVotedOn[0].down = false;
     }
     votes.votes.splice(index, 1, msgVotedOn[0]);
   }
