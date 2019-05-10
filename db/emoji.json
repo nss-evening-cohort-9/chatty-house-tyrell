@@ -34,6 +34,15 @@
     ":flushed:" : "&#x1F633",
     ":drooling:" : "&#x1F924",
     ":zany:" : "&#x1F92A",
-    ":yum:" : "&#x1F60B"
+    ":yum:" : "&#x1F60B",
+    ":zip_it:" : "&#x1F910",
+    ":hush:" : "&#x1F92B",
+    ":hug:" : "&#x1F917",
+    ":kissing:" : "&#x1F617",
+    ":kissing_closed_eyes:" : "&#x1F61A",
+    ":smirk:" : "&#x1F60F",
+    ":vomit:" : "&#x1F92E",
+    ":spew:" : "&#x1F92E",
+    ":mind_blown:" : "&#x1F92F"
   }
 }

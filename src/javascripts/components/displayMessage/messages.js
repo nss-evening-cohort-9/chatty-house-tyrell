@@ -164,9 +164,6 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
-<<<<<<< HEAD
   getEmojis,
-=======
   disableClr,
->>>>>>> master
 };

@@ -1,4 +1,4 @@
-import messages from './components/displayMessage/messages';
+import messageInfo from './components/displayMessage/messages';
 import themeChange from './components/themeChanger';
 import addMessage from './components/addMessage';
 import clear from './helpers/clear';
@@ -9,14 +9,13 @@ import '../styles/_footer.scss';
 import giphy from './components/displayMessage/giphy';
 
 const init = () => {
-  messages.getMessages();
-  messages.getEmojis();
+  messageInfo.getMessages();
+  messageInfo.getEmojis();
   themeChange.DarkOrLightModeEventListener();
   addMessage.addEventHandler();
   clear.clearMessages();
-  messages.userInfo();
-  messages.addDeleteBtnEventListener();
-  messages.disableClr();
+  messageInfo.userInfo();
+  messageInfo.addDeleteBtnEventListener();
   giphy.addEvents();
   big.fontToggleEvent();
 };
