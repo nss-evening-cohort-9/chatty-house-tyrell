@@ -50,8 +50,7 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
     domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
-    domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
-    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
+    domString += `<button type = "submit" id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
     domString += '</div>';
     if (messages[i].gif !== '') {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
@@ -90,6 +89,8 @@ const showTextArea = (e) => {
 };
 
 const postEditComment = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   postButtonId = e.target.id;
   for (let x = 0; x < messages.length; x += 1) {
     if (postButtonId === `postEdit${messages[x].id}`) {
