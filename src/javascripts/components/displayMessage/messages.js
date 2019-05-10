@@ -20,6 +20,10 @@ let buttonId = '';
 let buttonId1 = '';
 let postButtonId = '';
 
+// messageInput.autocomplete({
+//   source: emojiKeys,
+// });
+
 const disableClr = () => {
   if ($('#displayMessage').html() === '') {
     $('.clear-button').attr('disabled', true);
