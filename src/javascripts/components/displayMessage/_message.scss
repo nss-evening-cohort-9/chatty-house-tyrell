@@ -27,3 +27,13 @@
 .darkModeMessages{
   @include darkModeMessages;
 }
+
+// #textArea {
+//   display: none;
+// }
+.hidden {
+  display: none;
+}
+.shown {
+ display: block;
+}

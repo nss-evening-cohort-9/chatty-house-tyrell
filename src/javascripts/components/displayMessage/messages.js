@@ -15,6 +15,8 @@ const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
 let buttonId = '';
+let buttonId1 = '';
+let postButtonId = '';
 
 const disableClr = () => {
   if ($('#displayMessage').html() === '') {
@@ -54,6 +56,14 @@ const messageDomStringBuilder = () => {
     }
     domString += '</div>';
     domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
+    domString += '<div class = "editText">';
+    domString += `<button id = "edit${messages[i].id}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
+    domString += '</div>';
+    domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
+    domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
+    domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
+    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
+    domString += '</div>';
     if (messages[i].gif !== '') {
       domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
     }
@@ -71,15 +81,51 @@ const deleteMessage = (e) => {
     if (e.target.classList.contains('delete')) {
       if (buttonId === `${message.id}`) {
         messages.splice(index, 1);
+        messageDomStringBuilder();
       }
     }
   });
-  messageDomStringBuilder();
+};
+
+const showTextArea = (e) => {
+  buttonId1 = e.target.id;
+  for (let i = 0; i < messages.length; i += 1) {
+    if (buttonId1 === `edit${messages[i].id}`) {
+      messages[i].hideOrShowEdit = 'shown';
+      messageDomStringBuilder();
+    } else {
+      messages[i].hideOrShowEdit = 'hidden';
+      messageDomStringBuilder();
+    }
+  }
+};
+
+const postEditComment = (e) => {
+  postButtonId = e.target.id;
+  for (let x = 0; x < messages.length; x += 1) {
+    if (postButtonId === `postEdit${messages[x].id}`) {
+      messages[x].message = $(e.target).prev().val();
+      messages[x].hideOrShowEdit = 'hidden';
+      messageDomStringBuilder();
+      // $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
+    }
+  }
+};
+const addEditTextEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').on('click', '.edit', showTextArea);
+  });
 };
 
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
     $('body').button().click(deleteMessage);
+  });
+};
+
+const addPostEditCommentEventListener = () => {
+  $(document).ready(() => {
+    $('#displayMessage').on('click', '.postEdit', postEditComment);
   });
 };
 
@@ -125,6 +171,7 @@ const createMessageObject = () => {
     message: newMessage,
     timeStamp: newTimeStamp,
     image: userInfoObject[0].image,
+    hideOrShowEdit: 'hidden',
     gif: selectedGif,
     gifAltText: gifAlternateText,
   };
@@ -158,6 +205,7 @@ const getMessages = () => {
     .catch(err => console.error(err));
 };
 
+
 export default {
   getMessages,
   createMessageObject,
@@ -165,5 +213,7 @@ export default {
   userInfo,
   addDeleteBtnEventListener,
   getEmojis,
+  addEditTextEventListener,
+  addPostEditCommentEventListener,
   disableClr,
 };

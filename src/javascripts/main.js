@@ -16,6 +16,8 @@ const init = () => {
   clear.clearMessages();
   messageInfo.userInfo();
   messageInfo.addDeleteBtnEventListener();
+  messageInfo.addEditTextEventListener();
+  messageInfo.addPostEditCommentEventListener();
   giphy.addEvents();
   big.fontToggleEvent();
 };
