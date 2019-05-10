@@ -18,6 +18,7 @@ const showGifChoices = () => {
   selectedGif = '';
   for (let i = 0; i < gifChoices.length; i += 1) {
     domString += `<input id=${gifChoices[i].id} type="image" class="gifSelector" src="${gifChoices[i].images.fixed_width_small.url}" alt="${gifChoices[i].title}">`;
+    domString += `<textarea id=${gifChoices[i].id} type="image" class="gifSelector" src="${gifChoices[i].images.fixed_width_small.url}" alt="${gifChoices[i].title}"></textarea>`;
   }
   gifChoiceDiv.append(domString);
   $('.gifSelector').on('click', (e) => {
@@ -69,4 +70,6 @@ const clearSelectedGif = () => {
   selectedGif = '';
 };
 
-export default { addEvents, getSelectedGif, clearSelectedGif };
+export default {
+  addEvents, getSelectedGif, clearSelectedGif, addGif,
+};
