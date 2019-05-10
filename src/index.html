@@ -8,9 +8,26 @@
 </head>
 <body class="lightMode" id="largeText">
   <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div id="darkOrLightModeDiv">
+      <label class='switch'>
+        <input type="checkbox" id="darkOrLightMode">
+        <span class="slider round"></span>
+      </label>  
+      <p class="text-white">Dark Mode</p>
+    </div>
+    
+    <div id="bigModeDiv">
+      <label class='switch'>
+        <input type="checkbox" id="largeSize">
+        <span class="slider round"></span>
+      </label>  
+      <p class="text-white">Large Text</p>
+    </div>
+
     <div id = "navTitle" class="text-center d-flex justify-content-center">
       <h1 class="text-white d-flex justify-content-center">Chatty Tyrell</h1>
     </div>
+    <button class="clear-button float left">Clear</button>
     <div class="users nav-item dropdown btn-group dropleft">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <button class="btn btn-success"><h4>Users</h4></button>
@@ -29,30 +46,8 @@
         <label for="user1">Greg</label><br>
       </div>
     </div>
-    
-    <button class="clear-button">Clear</button>
-
   </nav>
-
-
-  <div id="darkOrLightModeDiv">
-    <label class='switch'>
-      <input type="checkbox" id="darkOrLightMode">
-      <span class="slider round"></span>
-    </label>  
-    <p>Dark Mode</p>
-  </div>
-
-  <div id="bigModeDiv">
-    <label class='switch'>
-      <input type="checkbox" id="largeSize">
-      <span class="slider round"></span>
-    </label>  
-    <p>Large Text</p>
-  </div>
-
-  <div id="displayMessage" class="lightModeMessages">
-
+  <div id="displayMessage" class="lightModeMessages"></div>
   </div>
   <div id="addMessage" class="container">
     <div class="row">
