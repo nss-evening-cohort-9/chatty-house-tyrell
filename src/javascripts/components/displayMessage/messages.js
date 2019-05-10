@@ -2,12 +2,15 @@ import $ from 'jquery';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
 import giphy from './giphy';
+import emoji from '../../helpers/data/getEmojiData';
 import './_message.scss';
 import './textChanger';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
+let emojis = [];
+let emojiKeys = [];
 const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
@@ -27,6 +30,14 @@ const userInfoObject = [{
   name: 'ANONYMOUS',
   image: 'http://www.stickpng.com/assets/images/5a461410d099a2ad03f9c998.png',
 }];
+
+const replacer = (match) => {
+  const unicode = emojis[match];
+  if (unicode === undefined) {
+    return match;
+  }
+  return unicode;
+};
 
 const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
@@ -139,11 +150,13 @@ const userInfo = () => {
       }
     }
     postingAs();
+    messageDomStringBuilder();
   });
 };
 
 const createMessageObject = () => {
-  const newMessage = messageInput[0].value;
+  const message = messageInput[0].value;
+  const newMessage = message.replace(/:\S+:/gi, replacer);
   const newTimeStamp = moment().format('lll');
   const messageId = commentCounter;
   let selectedGif = '';
@@ -173,6 +186,17 @@ const createMessageObject = () => {
   messageDomStringBuilder();
 };
 
+const getEmojis = () => {
+  emoji.getEmojiData()
+    .then((response) => {
+      const emojiResult = response.data.emojis;
+      emojis = emojiResult;
+      emojiKeys = Object.keys(emojis);
+      console.error(emojiKeys);
+    })
+    .catch(err => console.error(err));
+};
+
 const getMessages = () => {
   messageData.getMessageData()
     .then((response) => {
@@ -190,6 +214,7 @@ export default {
   keepClear,
   userInfo,
   addDeleteBtnEventListener,
+  getEmojis,
   addEditTextEventListener,
   addPostEditCommentEventListener,
   disableClr,
