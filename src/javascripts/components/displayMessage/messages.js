@@ -11,6 +11,7 @@ import './textChanger';
 const messageInput = $('#message-input');
 let commentCounter = 1;
 let messages = [];
+let messagesUpDown = [];
 let emojis = [];
 let emojiKeys = [];
 const userSelectorButtons = $('.userSelector');
@@ -39,25 +40,93 @@ const userInfoObject = [
 ];
 
 const tallyVotes = () => {
-  const messagesUpDown = [];
+  messagesUpDown = [];
   messages.forEach((message) => {
     const messageVotes = votes.votes.filter(msg => msg.messageId === message.id);
     const messageWithUpDown = Object.create(message);
     messageWithUpDown.id = message.id;
+    messageWithUpDown.username = message.username;
+    messageWithUpDown.timeStamp = message.timeStamp;
+    messageWithUpDown.image = message.image;
+    messageWithUpDown.hideOrShowEdit = message.hideOrShowEdit;
+    messageWithUpDown.gif = message.gif;
+    messageWithUpDown.gifAltText = message.gifAltText;
     messageWithUpDown.upTotal = messageVotes.filter(msg => msg.up).length;
     messageWithUpDown.downTotal = messageVotes.filter(msg => msg.down).length;
-    console.error('mwud', messageWithUpDown);
     messagesUpDown.push(messageWithUpDown);
   });
-  messagesUpDown.forEach((messUpDown) => {
-    if (messUpDown.id === messages.id) {
-      console.error('hello');
-      messages.thumbsUp = messUpDown.upTotal;
-      messages.thumbsDown = messUpDown.downTotal;
-    }
-  });
-  console.error(messages);
 };
+
+const replacer = (match) => {
+  const unicode = emojis[match];
+  if (unicode === undefined) {
+    return match;
+  }
+  return unicode;
+};
+
+const messageDomStringBuilder = () => {
+  // this clears the div each time for a fresh start
+  $('#displayMessage').html('');
+  // loops thru the messages array but limits it to 20
+  for (let i = 0; i < 20 && i < messagesUpDown.length; i += 1) {
+    let domString = '';
+    domString += `<div id="${messagesUpDown[i].id}" class="media message container">`;
+    domString += `<img src="${messagesUpDown[i].image}" class="mr-3 userImage" alt="...">`;
+    domString += '<div class="media-body">';
+    domString += '<div class="media-header row justify-content-start">';
+    domString += `<h5 class="userName mt-0 col-auto" >${messagesUpDown[i].username}</h5>`;
+    domString += `<p class="timeStamp mt-0 col">${messagesUpDown[i].timeStamp}</p>`;
+    if (messagesUpDown[i].username === userInfoObject[0].info.name) {
+      domString += '<div class="editText ml-auto mr-1">';
+      domString += `<button id="edit${messagesUpDown[i].id}" class="btn btn-primary float right edit btn-sm">Edit</button>`;
+      domString += '</div>';
+    }
+    if (messagesUpDown[i].username === userInfoObject[0].info.name) {
+      domString += `<button id="${messagesUpDown[i].id}" class="deleteButton btn btn-danger float right delete btn-sm mr-2">X</button>`;
+    }
+    domString += '</div>';
+    domString += '<div class="font-weight-normal messageContent col-12">';
+    domString += `<p>${messagesUpDown[i].message}</p>`;
+    domString += '</div>';
+    domString += `<div class="${messagesUpDown[i].hideOrShowEdit} editForm">`;
+    domString += `<textarea id="textArea" rows="4" cols="50">${messagesUpDown[i].message}</textarea>`;
+    domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm postEdit">Post</button>`;
+    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
+    domString += '</div>';
+    domString += '<div class="thumbs col-auto btn-group" role="group">';
+    // domString += `<div id="thumb-up-for-${messagesUpDown[i].username}">`;
+    domString += `<button type="button" id="thumb-up-${messagesUpDown[i].id}" class="thumb-btn thumbs-up btn btn-info"`;
+    if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
+      domString += 'disabled';
+    }
+    domString += '>';
+    domString += `👍<span class="badge badge-light">${messagesUpDown[i].upTotal}</span>`;
+    domString += '<span class="sr-only">Thumbs Ups</span>';
+    domString += '</button>';
+    // domString += '</div>';
+    // domString += `<div id="thumb-down-for-${messagesUpDown[i].username}">`;
+    domString += `<button type="button" id="thumb-down-${messagesUpDown[i].id}" class="thumb-btn thumbs-down btn btn-info"`;
+    if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
+      domString += 'disabled';
+    }
+    domString += '>';
+    domString += `👎<span class="badge badge-light">${messagesUpDown[i].downTotal}</span>`;
+    domString += '<span class="sr-only">Thumbs Downs</span>';
+    domString += '</button>';
+    // domString += '</div>';
+    if (messagesUpDown[i].gif !== '') {
+      domString += `<img src="${messagesUpDown[i].gif}" alt="${messagesUpDown[i].gifAltText}">`;
+    }
+    domString += '</div>';
+    domString += '</div>';
+    domString += '</div>';
+    domString += '<hr>';
+    $('#displayMessage').prepend(domString);
+  }
+  disableClr();
+};
+
 
 const thumbBtnCheck = (e) => {
   const btnId = e.currentTarget.id;
@@ -104,77 +173,14 @@ const thumbBtnCheck = (e) => {
     votes.votes.splice(index, 1, msgVotedOn[0]);
   }
   tallyVotes();
+  messageDomStringBuilder();
 };
 
 const addThumbEvents = () => {
-  $('.thumbs-up').on('click', thumbBtnCheck);
-  $('.thumbs-down').on('click', thumbBtnCheck);
-};
-
-const replacer = (match) => {
-  const unicode = emojis[match];
-  if (unicode === undefined) {
-    return match;
-  }
-  return unicode;
-};
-
-const messageDomStringBuilder = () => {
-  // this clears the div each time for a fresh start
-  $('#displayMessage').html('');
-  // loops thru the messages array but limits it to 20
-  for (let i = 0; i < 20 && i < messages.length; i += 1) {
-    let domString = '';
-    domString += `<div id="${messages[i].id}" class="media message container">`;
-    domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
-    domString += '<div class="media-body">';
-    domString += '<div class="media-header row justify-content-start">';
-    domString += `<h5 class="userName mt-0 col-auto" >${messages[i].username}</h5>`;
-    domString += `<p class= "timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
-    if (messages[i].username === userInfoObject[0].info.name) {
-      domString += `<button id="${messages[i].id}" class="deleteButton btn btn-danger btn-sm float right delete btn-sm">X</button>`;
-    }
-    domString += '</div>';
-    domString += `<p class = "font-weight-normal">${messages[i].message}</p>`;
-    domString += '<div class = "editText">';
-    domString += `<button id = "edit${messages[i].id}" class=" btn btn-primary btn-sm float right edit btn-sm">Edit</button>`;
-    domString += '</div>';
-    domString += `<div class = " ${messages[i].hideOrShowEdit}">`;
-    domString += `<textarea id = "textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
-    domString += `<button id = "postEdit${messages[i].id}" class = "btn btn-dark btn-sm float right postEdit">Post</button>`;
-    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
-    domString += '</div>';
-    if (messages[i].gif !== '') {
-      domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
-    }
-    domString += '</div>';
-    domString += '<div class="thumbs row">';
-    domString += `<div id="thumb-up-for-${messages[i].username}" class="col-auto ml-3">`;
-    domString += `<button type="button" id="thumb-up-${messages[i].id}" class="thumb-btn thumbs-up btn btn-primary"`;
-    if (messages[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
-      domString += 'disabled';
-    }
-    domString += '>';
-    domString += `👍<span class="badge badge-light">${messages[i].thumbsUp}</span>`;
-    domString += '<span class="sr-only">Thumbs Ups</span>';
-    domString += '</button>';
-    domString += '</div>';
-    domString += `<div id="thumb-down-for-${messages[i].username}" class="col-auto">`;
-    domString += `<button type="button" id="thumb-down-${messages[i].id}" class="thumb-btn thumbs-down btn btn-primary"`;
-    if (messages[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
-      domString += 'disabled';
-    }
-    domString += '>';
-    domString += `👎<span class="badge badge-light">${messages[i].thumbsDown}</span>`;
-    domString += '<span class="sr-only">Thumbs Downs</span>';
-    domString += '</button>';
-    domString += '</div>';
-    domString += '</div>';
-    domString += '<hr>';
-    $('#displayMessage').prepend(domString);
-  }
-  addThumbEvents();
-  disableClr();
+  $(document).ready(() => {
+    $('#displayMessage').on('click', '.thumbs-up', thumbBtnCheck);
+    $('#displayMessage').on('click', '.thumbs-down', thumbBtnCheck);
+  });
 };
 
 const deleteMessage = (e) => {
@@ -183,20 +189,27 @@ const deleteMessage = (e) => {
     if (e.target.classList.contains('delete')) {
       if (buttonId === `${message.id}`) {
         messages.splice(index, 1);
-        messageDomStringBuilder();
       }
     }
   });
+  messagesUpDown.forEach((message, index) => {
+    if (e.target.classList.contains('delete')) {
+      if (buttonId === `${message.id}`) {
+        messagesUpDown.splice(index, 1);
+      }
+    }
+  });
+  messageDomStringBuilder();
 };
 
 const showTextArea = (e) => {
   buttonId1 = e.target.id;
-  for (let i = 0; i < messages.length; i += 1) {
-    if (buttonId1 === `edit${messages[i].id}`) {
-      messages[i].hideOrShowEdit = 'shown';
+  for (let i = 0; i < messagesUpDown.length; i += 1) {
+    if (buttonId1 === `edit${messagesUpDown[i].id}`) {
+      messagesUpDown[i].hideOrShowEdit = 'shown';
       messageDomStringBuilder();
     } else {
-      messages[i].hideOrShowEdit = 'hidden';
+      messagesUpDown[i].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
     }
   }
@@ -204,10 +217,10 @@ const showTextArea = (e) => {
 
 const postEditComment = (e) => {
   postButtonId = e.target.id;
-  for (let x = 0; x < messages.length; x += 1) {
-    if (postButtonId === `postEdit${messages[x].id}`) {
-      messages[x].message = $(e.target).prev().val();
-      messages[x].hideOrShowEdit = 'hidden';
+  for (let x = 0; x < messagesUpDown.length; x += 1) {
+    if (postButtonId === `postEdit${messagesUpDown[x].id}`) {
+      messagesUpDown[x].message = $(e.target).prev().val();
+      messagesUpDown[x].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
       // $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
     }
@@ -232,6 +245,7 @@ const addPostEditCommentEventListener = () => {
 };
 
 const keepClear = () => {
+  messagesUpDown = [];
   messages = [];
   messageDomStringBuilder();
 };
@@ -239,7 +253,6 @@ const keepClear = () => {
 
 const postingAs = () => {
   const username = userInfoObject[0].info.name;
-  console.error(username);
   $('#userPostingAs').html(username);
 };
 
@@ -287,6 +300,7 @@ const createMessageObject = () => {
   $('#gifAddedBadge')[0].style.display = 'none';
   $('#gifChoiceDiv').empty();
   giphy.clearSelectedGif();
+  tallyVotes();
   messageDomStringBuilder();
 };
 
@@ -306,6 +320,7 @@ const getMessages = () => {
     .then((response) => {
       const messageResult = response.data.messages;
       messages = messageResult;
+      tallyVotes();
       messageDomStringBuilder();
     })
     .catch(err => console.error(err));
