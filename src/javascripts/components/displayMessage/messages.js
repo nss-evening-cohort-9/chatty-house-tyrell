@@ -95,7 +95,6 @@ const messageDomStringBuilder = () => {
     domString += `<div class="${messagesUpDown[i].hideOrShowEdit} editForm">`;
     domString += `<textarea id="textArea" rows="4" cols="50">${messagesUpDown[i].message}</textarea>`;
     domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm postEdit">Post</button>`;
-    domString += '<button type="button" id="addGif" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#gifModal">Add gif</button>';
     domString += '</div>';
     domString += '<div class="thumbs col-auto btn-group" role="group">';
     // domString += `<div id="thumb-up-for-${messagesUpDown[i].username}">`;
@@ -234,7 +233,7 @@ const addEditTextEventListener = () => {
 
 const addDeleteBtnEventListener = () => {
   $(document).ready(() => {
-    $('body').button().click(deleteMessage);
+    $('body').on('click', '.delete', deleteMessage);
   });
 };
 
