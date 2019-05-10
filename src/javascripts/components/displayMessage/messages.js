@@ -149,6 +149,7 @@ const userInfo = () => {
       }
     }
     postingAs();
+    messageDomStringBuilder();
   });
 };
 
