@@ -1,6 +1,6 @@
-import greg from '../../assests/images/greg.png';
-import mark from '../../assests/images/mark.png';
-import sean from '../../assests/images/sean.png';
+import greg from '../../assets/images/greg.png';
+import mark from '../../assets/images/mark.png';
+import sean from '../../assets/images/sean.png';
 
 const users = [
   {
