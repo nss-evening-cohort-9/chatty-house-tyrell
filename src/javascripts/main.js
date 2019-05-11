@@ -19,6 +19,7 @@ const init = () => {
   messageInfo.addDeleteBtnEventListener();
   messageInfo.addEditTextEventListener();
   messageInfo.addPostEditCommentEventListener();
+  messageInfo.addThumbEvents();
   giphy.addEvents();
   big.fontToggleEvent();
   // chatbot.addChatBotEventListener();
