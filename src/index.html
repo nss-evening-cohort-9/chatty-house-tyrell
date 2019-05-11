@@ -30,7 +30,7 @@
     <button class="clear-button btn btn-outline-danger float left">Clear</button>
     <div class="users nav-item dropdown btn-group dropleft">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <button id="userBtn" class="btn btn-outline-success">Users</button>
+        <button id="userBtn" class="btn btn-outline-success">Login</button>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
@@ -63,6 +63,7 @@
               <button type="button" id="addGif" class="btn btn-outline-info" data-toggle="modal" data-target="#gifModal">Add gif</button>
           </div>
         </div>
+        
         <span id="gifAddedBadge" class="badge badge-info">Gif Added</span>
       </form>
     </div>
@@ -97,6 +98,13 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="chat">
+      <div>User:<span id="user"></span></div>
+      <div>chatbot:<span id="chatbot"></span></div>
+      <!-- <p id="chatbot" >- - C H A T - -<br></p> -->
+      <div><input id="chattybot" type="text" placeholder="Hey there!" autocomplete="off"></div>
     </div>
 </body>
 </html>

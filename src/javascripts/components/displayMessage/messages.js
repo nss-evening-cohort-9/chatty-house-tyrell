@@ -5,6 +5,7 @@ import giphy from './giphy';
 import emoji from '../../helpers/data/getEmojiData';
 import './_message.scss';
 import './textChanger';
+// import chatbot from './chatBot';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
