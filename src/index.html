@@ -8,12 +8,29 @@
 </head>
 <body class="lightMode" id="largeText">
   <nav class="navbar fixed-top navbar-dark bg-dark">
-    <div class="text-center">
-      <h1 class="text-white">Chatty Tyrell</h1>
+    <div id="darkOrLightModeDiv">
+      <label class='switch'>
+        <input type="checkbox" id="darkOrLightMode">
+        <span class="slider round"></span>
+      </label>  
+      <h6 class="text-white">Dark Mode</h6>
     </div>
+    
+    <div id="bigModeDiv">
+      <label class='switch'>
+        <input type="checkbox" id="largeSize">
+        <span class="slider round"></span>
+      </label>  
+      <h6 class="text-white">Large Text</h6>
+    </div>
+
+    <div id = "navTitle" class="text-center d-flex justify-content-center">
+      <h1 class="text-white d-flex justify-content-center">Chatty Tyrell</h1>
+    </div>
+    <button class="clear-button btn btn-outline-danger float left">Clear</button>
     <div class="users nav-item dropdown btn-group dropleft">
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <button class="btn btn-success"><h4>Users</h4></button>
+        <button id="userBtn" class="btn btn-outline-success">Login</button>
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
@@ -29,30 +46,8 @@
         <label for="user1">Greg</label><br>
       </div>
     </div>
-    
-    <button class="clear-button">Clear</button>
-
   </nav>
-
-
-  <div id="darkOrLightModeDiv">
-    <label class='switch'>
-      <input type="checkbox" id="darkOrLightMode">
-      <span class="slider round"></span>
-    </label>  
-    <p>Dark Mode</p>
-  </div>
-
-  <div id="bigModeDiv">
-    <label class='switch'>
-      <input type="checkbox" id="largeSize">
-      <span class="slider round"></span>
-    </label>  
-    <p>Large Text</p>
-  </div>
-
-  <div id="displayMessage" class="lightModeMessages">
-
+  <div id="displayMessage" class="lightModeMessages"></div>
   </div>
   <div id="addMessage" class="container">
     <div class="row">
@@ -68,6 +63,7 @@
               <button type="button" id="addGif" class="btn btn-outline-info" data-toggle="modal" data-target="#gifModal">Add gif</button>
           </div>
         </div>
+        
         <span id="gifAddedBadge" class="badge badge-info">Gif Added</span>
       </form>
     </div>
@@ -103,5 +99,12 @@
         </div>
       </div>
     </div>
+
+    <!-- <div id="chat">
+      <div>User:<span id="user"></span></div>
+      <div>chatbot:<span id="chatbot"></span></div>
+      <p id="chatbot" >- - C H A T - -<br></p> -->
+      <!-- <div><input id="chattybot" type="text" placeholder="Hey there!" autocomplete="off"></div>
+    </div> -->
 </body>
 </html>

@@ -7,6 +7,7 @@ import 'bootstrap';
 import '../styles/main.scss';
 import '../styles/_footer.scss';
 import giphy from './components/displayMessage/giphy';
+// import chatbot from './components/displayMessage/chatBot';
 
 const init = () => {
   messageInfo.getMessages();
@@ -21,6 +22,7 @@ const init = () => {
   messageInfo.addThumbEvents();
   giphy.addEvents();
   big.fontToggleEvent();
+  // chatbot.addChatBotEventListener();
 };
 
 init();

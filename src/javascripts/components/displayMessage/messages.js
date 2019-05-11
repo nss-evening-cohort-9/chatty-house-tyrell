@@ -6,6 +6,7 @@ import giphy from './giphy';
 import emoji from '../../helpers/data/getEmojiData';
 import './_message.scss';
 import './textChanger';
+// import chatbot from './chatBot';
 
 const messageInput = $('#message-input');
 let commentCounter = 1;
@@ -218,6 +219,8 @@ const showTextArea = (e) => {
 };
 
 const postEditComment = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   postButtonId = e.target.id;
   for (let x = 0; x < messagesUpDown.length; x += 1) {
     if (postButtonId === `postEdit${messagesUpDown[x].id}`) {
