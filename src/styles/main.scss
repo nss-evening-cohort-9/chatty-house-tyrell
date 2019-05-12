@@ -19,6 +19,10 @@
   @include sliderButton;
 }
 
+body {
+  font-family: 'Rock Salt', cursive;
+}
+
 hr{
   border: 0;
   height: 1px;
@@ -26,7 +30,8 @@ hr{
 }
 
 .largeMode {
-  font-size: 32px;
+  font-size: 28px;
+  flex-basis: inherit;
 }
 
 .regMode {
@@ -35,4 +40,42 @@ hr{
 
 #navTitle {
   margin: auto;
+}
+
+.thumb-btn {
+  margin-right: 10px;
+}
+
+.navbar {
+  padding: 0;
+}
+
+#displayMessage {
+  margin-top: 107px;
+  margin-bottom: 107px;
+  // height: 70%;
+  border: 1px solid black;
+  box-shadow: 3px 3px 13px black;
+  border: 0;
+}
+
+img {
+  border: 1px solid black;
+}
+
+.dropdown-menu {
+  padding-left: .5em;
+}
+
+#busName {
+  font-family: 'Libre Barcode 128 Text', cursive;
+  font-size: 72px;
+}
+
+.thumbs {
+  font-family: 'Antic Slab', serif;
+}
+
+#addMessage {
+  padding: 0;
 }

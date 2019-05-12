@@ -1,110 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Chatty</title>
+  <link href="https://fonts.googleapis.com/css?family=Antic+Slab|Libre+Barcode+128+Text|Rock+Salt" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/main.scss">
 </head>
+
 <body class="lightMode" id="largeText">
-  <nav class="navbar fixed-top navbar-dark bg-dark">
-    <div id="darkOrLightModeDiv">
-      <label class='switch'>
-        <input type="checkbox" id="darkOrLightMode">
-        <span class="slider round"></span>
-      </label>  
-      <h6 class="text-white">Dark Mode</h6>
-    </div>
-    
-    <div id="bigModeDiv">
-      <label class='switch'>
-        <input type="checkbox" id="largeSize">
-        <span class="slider round"></span>
-      </label>  
-      <h6 class="text-white">Large Text</h6>
-    </div>
-
-    <div id = "navTitle" class="text-center d-flex justify-content-center">
-      <h1 class="text-white d-flex justify-content-center">Chatty Tyrell</h1>
-    </div>
-    <button class="clear-button btn btn-outline-danger float left">Clear</button>
-    <div class="users nav-item dropdown btn-group dropleft">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <button id="userBtn" class="btn btn-outline-success">Login</button>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
-        <label for="user0">Anonymous</label><br>
-
-        <input type="radio" class="userSelector" name="userName" id="user2" value="Mark">
-        <label for="user2">Mark</label><br>
-        
-        <input type="radio" class="userSelector" name="userName" id="user3" value="Sean">
-        <label for="user3">Sean</label><br>
-        
-        <input type="radio" class="userSelector" name="userName" id="user1" value="Greg">
-        <label for="user1">Greg</label><br>
+  <div class="container">
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+      <div id="darkOrLightModeDiv">
+        <label class='switch'>
+          <input type="checkbox" id="darkOrLightMode">
+          <span class="slider round"></span>
+        </label>
+        <h6 class="text-white">Dark Mode</h6>
       </div>
+
+      <div id="bigModeDiv">
+        <label class='switch'>
+          <input type="checkbox" id="largeSize">
+          <span class="slider round"></span>
+        </label>
+        <h6 class="text-white">Large Mode</h6>
+      </div>
+
+      <div id="navTitle" class="text-center d-flex justify-content-center">
+        <h1 class="text-white d-flex justify-content-center" id="busName">Chatty Tyrell</h1>
+      </div>
+      <button class="clear-button btn btn-outline-danger float left">Clear</button>
+      <div class="users nav-item dropdown btn-group dropleft">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <button id="userBtn" class="btn btn-outline-success">Login</button>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
+          <label for="user0">Anonymous</label><br>
+
+          <input type="radio" class="userSelector" name="userName" id="user2" value="Mark">
+          <label for="user2">Mark</label><br>
+
+          <input type="radio" class="userSelector" name="userName" id="user3" value="Sean">
+          <label for="user3">Sean</label><br>
+
+          <input type="radio" class="userSelector" name="userName" id="user1" value="Greg">
+          <label for="user1">Greg</label><br>
+        </div>
+      </nav>
     </div>
-  </nav>
+  </div>
+
+  <div class="myDiv">
+      <div class="bg"></div>
+  </div>
+
   <div id="displayMessage" class="lightModeMessages"></div>
+
   </div>
   <div id="addMessage" class="container">
     <div class="row">
       <div id="postingAsDiv" class="col 12 col-md-3 offset-md-1 mt-3">
-        <p>You are now posting as:</p>
+        <p>Currently posting as:</p>
         <p id="userPostingAs">Anonymous</p>
       </div>
       <form class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-3" id="messageSubmitForm" action="POST">
         <div class="input-group">
           <input id="message-input" type="text" class="form-control" placeholder="Say Something!">
           <div class="input-group-append">
-              <button type="submit" id="messageSubmit" class="btn btn-outline-success">Post</button>
-              <button type="button" id="addGif" class="btn btn-outline-info" data-toggle="modal" data-target="#gifModal">Add gif</button>
+            <button type="submit" id="messageSubmit" class="btn btn-outline-success">Post</button>
+            <button type="button" id="addGif" class="btn btn-outline-info" data-toggle="modal"
+              data-target="#gifModal">Add gif</button>
           </div>
         </div>
-        
+
         <span id="gifAddedBadge" class="badge badge-info">Gif Added</span>
       </form>
     </div>
   </div>
   <div class="modal fade" id="gifModal" tabindex="-1" role="dialog" aria-labelledby="gifModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="gifModalLabel">Search For A Gif</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body container">
-            <div class="row justify-content-around">
-              <form action="GET" class="col-12 col-sm-10 col-lg-8 mb-2" id="gifSearchForm">
-                <div class="input-group">
-                  <input id="gifSearchBar" class="form-control"type="text" placeholder="Search with a keyword">
-                  <div class="input-group-append">
-                    <button type="submit" id="gifSearchBtn" class="btn btn-outline-success">Search</button>
-                  </div>
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gifModalLabel">Search For A Gif</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body container">
+          <div class="row justify-content-around">
+            <form action="GET" class="col-12 col-sm-10 col-lg-8 mb-2" id="gifSearchForm">
+              <div class="input-group">
+                <input id="gifSearchBar" class="form-control" type="text" placeholder="Search with a keyword">
+                <div class="input-group-append">
+                  <button type="submit" id="gifSearchBtn" class="btn btn-outline-success">Search</button>
                 </div>
-              </form>
-            </div>
-            <div id="gifChoiceDiv" class="row justify-content-around">
+              </div>
+            </form>
+          </div>
+          <div id="gifChoiceDiv" class="row justify-content-around">
 
-            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" id="confirmAddedGif" class="btn btn-primary"data-dismiss="modal" >Choose Gif</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" id="confirmAddedGif" class="btn btn-primary" data-dismiss="modal">Choose Gif</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- <div id="chat">
+  <!-- <div id="chat">
       <div>User:<span id="user"></span></div>
       <div>chatbot:<span id="chatbot"></span></div>
       <p id="chatbot" >- - C H A T - -<br></p> -->
-      <!-- <div><input id="chattybot" type="text" placeholder="Hey there!" autocomplete="off"></div>
+  <!-- <div><input id="chattybot" type="text" placeholder="Hey there!" autocomplete="off"></div>
     </div> -->
 </body>
+
 </html>
