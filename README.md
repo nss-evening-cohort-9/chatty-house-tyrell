@@ -42,5 +42,5 @@ You should be able to change the theme to light or dark mode also. And, choose a
 * In the terminal, type `npm start` to run the webpage.
 * If you want to make a production build of this project, type `npm run build`. This will create a folder called build with all of the minified code you need.
 
-## Author
+## Authors
 Mark Okafor, Greg Stephen, Sean Davis
