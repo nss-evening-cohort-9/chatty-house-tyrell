@@ -6,7 +6,18 @@ This is a messaging website committed to multiple users being able to type, edit
 You should be able to change the theme to light or dark mode also. And, choose a large mode for the visually impaired.
 
 ## Screenshots
-![alt text](https://user-images.githubusercontent.com/24858089/57578356-395b4800-7450-11e9-8adc-ee98021f5163.png)
+* Home Page
+![alt text]()
+* Dark Mode
+![alt text]()
+* Thumbs Up and Down
+![alt text]()
+* Clear Mode
+![alt text]()
+* Editing
+![alt text]()
+* Multiple Users
+![alt text]()
 
 ## Installation Instructions
 * Clone down this repo
