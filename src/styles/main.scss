@@ -52,7 +52,8 @@ hr{
 
 #displayMessage {
   margin-top: 107px;
-  height: 90%;
+  margin-bottom: 107px;
+  // height: 70%;
   border: 1px solid black;
   box-shadow: 3px 3px 13px black;
   border: 0;
@@ -73,4 +74,8 @@ img {
 
 .thumbs {
   font-family: 'Antic Slab', serif;
+}
+
+#addMessage {
+  padding: 0;
 }
