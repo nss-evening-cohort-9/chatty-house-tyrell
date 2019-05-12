@@ -24,6 +24,7 @@ const init = () => {
   big.fontToggleEvent();
   big.toggleDiv();
   big.toggleText();
+  big.toggleUserInfo();
   // chatbot.addChatBotEventListener();
 };
 

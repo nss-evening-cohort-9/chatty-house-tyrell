@@ -1,22 +1,9 @@
 import $ from 'jquery';
 
-// const p = $('p');
-
-// const fontToggleEvent = () => {
-//   $('#largeSize').click(() => {
-//     if (p.hasClass('largeMode')) {
-//       p.removeClass('largeMode');
-//       p.addClass('regMode');
-//     } else {
-//       p.removeClass('regMode');
-//       p.addClass('largeMode');
-//     }
-//   });
-// };
-
 const p = $('p');
-const h5 = $('btn');
+const h6 = $('h6');
 const disp = $('#displayMessage');
+const h5 = $('h5');
 
 const fontToggleEvent = () => {
   $('#largeSize').click(() => {
@@ -26,6 +13,18 @@ const fontToggleEvent = () => {
     } else {
       p.removeClass('regMode');
       p.addClass('largeMode');
+    }
+  });
+};
+
+const toggleUserInfo = () => {
+  $('#largeSize').click(() => {
+    if (h5.hasClass('largeMode')) {
+      h5.removeClass('largeMode');
+      h5.addClass('regMode');
+    } else {
+      h5.removeClass('regMode');
+      h5.addClass('largeMode');
     }
   });
 };
@@ -44,16 +43,19 @@ const toggleDiv = () => {
 
 const toggleText = () => {
   $('#largeSize').click(() => {
-    if (h5.hasClass('largeMode')) {
-      h5.removeClass('largeMode');
-      h5.addClass('regMode');
+    if (h6.hasClass('largeMode')) {
+      h6.removeClass('largeMode');
+      h6.addClass('regMode');
     } else {
-      h5.removeClass('regMode');
-      h5.addClass('largeMode');
+      h6.removeClass('regMode');
+      h6.addClass('largeMode');
     }
   });
 };
 
-export default { fontToggleEvent, toggleDiv, toggleText };
-
-// export default { fontToggleEvent };
+export default {
+  fontToggleEvent,
+  toggleDiv,
+  toggleText,
+  toggleUserInfo,
+};

@@ -26,11 +26,11 @@
           <input type="checkbox" id="largeSize">
           <span class="slider round"></span>
         </label>
-        <h6 class="text-white">Large Text</h6>
+        <h6 class="text-white">Large Mode</h6>
       </div>
 
       <div id="navTitle" class="text-center d-flex justify-content-center">
-        <h1 class="text-white d-flex justify-content-center">Chatty Tyrell</h1>
+        <h1 class="text-white d-flex justify-content-center" id="busName">Chatty Tyrell</h1>
       </div>
       <button class="clear-button btn btn-outline-danger float left">Clear</button>
       <div class="users nav-item dropdown btn-group dropleft">
@@ -54,12 +54,14 @@
       </nav>
     </div>
   </div>
+
   <div id="displayMessage" class="lightModeMessages"></div>
+
   </div>
   <div id="addMessage" class="container">
     <div class="row">
       <div id="postingAsDiv" class="col 12 col-md-3 offset-md-1 mt-3">
-        <p>You are now posting as:</p>
+        <p>Currently posting as:</p>
         <p id="userPostingAs">Anonymous</p>
       </div>
       <form class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-3" id="messageSubmitForm" action="POST">
