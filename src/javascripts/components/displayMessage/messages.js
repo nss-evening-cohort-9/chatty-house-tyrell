@@ -83,7 +83,7 @@ const messageDomStringBuilder = () => {
       domString += '</div>';
     }
     if (messagesUpDown[i].username === userInfoObject[0].info.name) {
-      domString += `<button id="${messagesUpDown[i].id}" class="deleteButton btn btn-danger float right delete btn-sm mr-2">X</button>`;
+      domString += `<button id="${messagesUpDown[i].id}" class="deleteButton btn btn-danger float right delete btn-sm mr-2">Delete</button>`;
     }
     domString += '</div>';
     domString += '<div class="font-weight-normal messageContent col-12">';
