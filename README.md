@@ -7,17 +7,32 @@ You should be able to change the theme to light or dark mode also. And, choose a
 
 ## Screenshots
 * Home Page
-![alt text]()
+
+![alt text](https://i.ibb.co/PG608hM/CT-page.png[/img])
+
 * Dark Mode
-![alt text]()
+
+![alt text](https://i.ibb.co/8xRV2Qj/CT-Dark-Mode.png)
+
 * Thumbs Up and Down
-![alt text]()
+
+![alt text](https://i.ibb.co/5LdH9XQ/CT-Thumbs.png)
+
 * Clear Mode
-![alt text]()
+
+![alt text](https://i.ibb.co/1vDv4sX/CT-clear-Mode.png[/img])
+
 * Editing
-![alt text]()
+
+![alt text](https://i.ibb.co/Ph2P9Vk/CT-Edit.png[/img])
+
+* Large Mode
+
+![alt text](https://i.ibb.co/7y6c2fg/CT-Large-Mode.png)
+
 * Multiple Users
-![alt text]()
+
+![alt text](https://i.ibb.co/8XHTJJr/CT-multi-User.png)
 
 ## Installation Instructions
 * Clone down this repo
