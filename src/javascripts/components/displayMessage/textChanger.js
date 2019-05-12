@@ -3,7 +3,9 @@ import $ from 'jquery';
 const p = $('p');
 const h6 = $('h6');
 const disp = $('#displayMessage');
-const h5 = $('h5');
+const h5 = $('.userName');
+const userBtn = $('#userBtn');
+const clrBtn = $('.clear-button');
 
 const fontToggleEvent = () => {
   $('#largeSize').click(() => {
@@ -53,9 +55,35 @@ const toggleText = () => {
   });
 };
 
+const buttonToggle = () => {
+  $('#largeSize').click(() => {
+    if (clrBtn.hasClass('largeMode')) {
+      clrBtn.removeClass('largeMode');
+      clrBtn.addClass('regMode');
+    } else {
+      clrBtn.removeClass('regMode');
+      clrBtn.addClass('largeMode');
+    }
+  });
+};
+
+const userToggle = () => {
+  $('#largeSize').click(() => {
+    if (userBtn.hasClass('largeMode')) {
+      userBtn.removeClass('largeMode');
+      userBtn.addClass('regMode');
+    } else {
+      userBtn.removeClass('regMode');
+      userBtn.addClass('largeMode');
+    }
+  });
+};
+
 export default {
   fontToggleEvent,
   toggleDiv,
   toggleText,
   toggleUserInfo,
+  buttonToggle,
+  userToggle,
 };
