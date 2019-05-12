@@ -22,6 +22,8 @@ const init = () => {
   messageInfo.addThumbEvents();
   giphy.addEvents();
   big.fontToggleEvent();
+  big.toggleDiv();
+  big.toggleText();
   // chatbot.addChatBotEventListener();
 };
 

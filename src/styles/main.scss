@@ -26,7 +26,8 @@ hr{
 }
 
 .largeMode {
-  font-size: 32px;
+  font-size: 28px;
+  flex-basis: inherit;
 }
 
 .regMode {
@@ -35,4 +36,12 @@ hr{
 
 #navTitle {
   margin: auto;
+}
+
+.thumb-btn {
+  margin-right: 10px;
+}
+
+.navbar {
+  padding: 0;
 }
