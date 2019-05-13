@@ -45,6 +45,9 @@ hr{
   .mobile-font {
     font-size: .25em;
     @media (min-width: 768px) {
+      font-size: .75em;
+    }
+    @media (min-width: 992px) {
       font-size: 1em;
     }
   }

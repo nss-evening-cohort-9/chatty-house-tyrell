@@ -17,18 +17,6 @@ let emojiKeys = [];
 const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
-let buttonId = '';
-let buttonId1 = '';
-let postButtonId = '';
-
-const disableClr = () => {
-  if ($('#displayMessage').html() === '') {
-    $('.clear-button').attr('disabled', true);
-  } else {
-    $('.clear-button').attr('disabled', false);
-  }
-};
-
 const userInfoObject = [
   {
     id: 'user0',
@@ -39,11 +27,17 @@ const userInfoObject = [
   },
 ];
 
+/*
+  Gets all of the votes from the messages and tallys them together
+  Creates new objects that copy old messages object but with new up and down totals
+  Pushes those objects to the messagesUpDown array
+  */
 const tallyVotes = () => {
   messagesUpDown = [];
   messages.forEach((message) => {
     const messageVotes = votes.votes.filter(msg => msg.messageId === message.id);
     const messageWithUpDown = Object.create(message);
+    // creates the new message object with new up and down total votes
     messageWithUpDown.id = message.id;
     messageWithUpDown.username = message.username;
     messageWithUpDown.timeStamp = message.timeStamp;
@@ -57,12 +51,12 @@ const tallyVotes = () => {
   });
 };
 
-const replacer = (match) => {
-  const unicode = emojis[match];
-  if (unicode === undefined) {
-    return match;
+const disableClr = () => {
+  if ($('#displayMessage').html() === '') {
+    $('.clear-button').attr('disabled', true);
+  } else {
+    $('.clear-button').attr('disabled', false);
   }
-  return unicode;
 };
 
 const messageDomStringBuilder = () => {
@@ -88,14 +82,17 @@ const messageDomStringBuilder = () => {
     domString += '</div>';
     domString += '<div class="font-weight-normal messageContent col-12">';
     domString += `<p>${messagesUpDown[i].message}</p>`;
+    // Gif
     if (messagesUpDown[i].gif !== '') {
       domString += `<img src="${messagesUpDown[i].gif}" alt="${messagesUpDown[i].gifAltText}">`;
     }
     domString += '</div>';
+    // Edit Form
     domString += `<div class="${messagesUpDown[i].hideOrShowEdit} editForm">`;
     domString += `<textarea id="textArea" rows="4" cols="50">${messagesUpDown[i].message}</textarea>`;
-    domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm postEdit">Post</button>`;
+    domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm ml-3 mb-4 postEdit">Post</button>`;
     domString += '</div>';
+    // THUMBS
     domString += '<div class="thumbs col-auto btn-group" role="group">';
     domString += `<button type="button" id="thumb-up-${messagesUpDown[i].id}" class="thumb-btn thumbs-up btn btn-info"`;
     if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
@@ -122,7 +119,7 @@ const messageDomStringBuilder = () => {
   disableClr();
 };
 
-
+// Gets the thumb buttons and edits the votes array
 const thumbBtnCheck = (e) => {
   const btnId = e.currentTarget.id;
   const message = $(`#${btnId}`).closest('.message');
@@ -154,18 +151,23 @@ const thumbBtnCheck = (e) => {
       newThumb.down = true;
     }
     votes.votes.push(newThumb);
+    // if its already been voted on it checks what they voted
   } else if (upOrDownVote === 'up') {
+    // if it was voted down before then changes up to true and down to false
     if (!msgVotedOn[0].up) {
       msgVotedOn[0].up = true;
       msgVotedOn[0].down = false;
+    // but if it was up before it changes the up to false and both up and down should be false
     } else if (msgVotedOn[0].up === true && msgVotedOn[0].down === false) {
       msgVotedOn[0].up = false;
     }
     votes.votes.splice(index, 1, msgVotedOn[0]);
   } else if (upOrDownVote === 'down') {
+    // if it was up before then changes down to true and up to false
     if (!msgVotedOn[0].down) {
       msgVotedOn[0].down = true;
       msgVotedOn[0].up = false;
+    // but if it was up before it changes the down to false and both up and down should be false
     } else if (msgVotedOn[0].down === true && msgVotedOn[0].up === false) {
       msgVotedOn[0].down = false;
     }
@@ -175,25 +177,19 @@ const thumbBtnCheck = (e) => {
   messageDomStringBuilder();
 };
 
-const addThumbEvents = () => {
-  $(document).ready(() => {
-    $('#displayMessage').on('click', '.thumbs-up', thumbBtnCheck);
-    $('#displayMessage').on('click', '.thumbs-down', thumbBtnCheck);
-  });
-};
-
+// splices the message out of both arrays and reprints the dom
 const deleteMessage = (e) => {
-  buttonId = e.target.id;
+  const deleteButtonId = e.target.id;
   messages.forEach((message, index) => {
     if (e.target.classList.contains('delete')) {
-      if (buttonId === `${message.id}`) {
+      if (deleteButtonId === `${message.id}`) {
         messages.splice(index, 1);
       }
     }
   });
   messagesUpDown.forEach((message, index) => {
     if (e.target.classList.contains('delete')) {
-      if (buttonId === `${message.id}`) {
+      if (deleteButtonId === `${message.id}`) {
         messagesUpDown.splice(index, 1);
       }
     }
@@ -201,10 +197,11 @@ const deleteMessage = (e) => {
   messageDomStringBuilder();
 };
 
+// Will show the edit comment form of the message that houses the button clicked
 const showTextArea = (e) => {
-  buttonId1 = e.target.id;
+  const showEditTextButtonId = e.target.id;
   for (let i = 0; i < messagesUpDown.length; i += 1) {
-    if (buttonId1 === `edit${messagesUpDown[i].id}`) {
+    if (showEditTextButtonId === `edit${messagesUpDown[i].id}`) {
       messagesUpDown[i].hideOrShowEdit = 'shown';
       messageDomStringBuilder();
     } else {
@@ -214,48 +211,43 @@ const showTextArea = (e) => {
   }
 };
 
+// Will change the message in both message and messagesUpDown arrays
+// Will then change the display of the edit message form to hidden
 const postEditComment = (e) => {
   e.preventDefault();
   e.stopPropagation();
-  postButtonId = e.target.id;
+  const postButtonId = e.target.id;
   for (let x = 0; x < messagesUpDown.length; x += 1) {
     if (postButtonId === `postEdit${messagesUpDown[x].id}`) {
       messagesUpDown[x].message = $(e.target).prev().val();
       messagesUpDown[x].hideOrShowEdit = 'hidden';
+    }
+  }
+  for (let x = 0; x < messages.length; x += 1) {
+    if (postButtonId === `postEdit${messages[x].id}`) {
+      messages[x].message = $(e.target).prev().val();
+      messages[x].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
     }
   }
 };
-const addEditTextEventListener = () => {
-  $(document).ready(() => {
-    $('#displayMessage').on('click', '.edit', showTextArea);
-  });
-};
 
-const addDeleteBtnEventListener = () => {
-  $(document).ready(() => {
-    $('body').on('click', '.delete', deleteMessage);
-  });
-};
-
-const addPostEditCommentEventListener = () => {
-  $(document).ready(() => {
-    $('#displayMessage').on('click', '.postEdit', postEditComment);
-  });
-};
-
+// Removes everything from the arrays so when clear is pressed they stay cleared
 const keepClear = () => {
   messagesUpDown = [];
   messages = [];
   messageDomStringBuilder();
 };
 
-
+// Gathers username from the userInfoObject created and prints it in the footer
 const postingAs = () => {
   const username = userInfoObject[0].info.name;
   $('#userPostingAs').html(username);
 };
 
+// Gets user info from the login checkboxes and replaces the userInfoObject with new info
+// Then runs postingAs to change the footer message
+// Then reprints the messages with userInfo for conditionals
 const userInfo = () => {
   userSelectorButtons.click((e) => {
     const userId = e.target.id;
@@ -269,6 +261,17 @@ const userInfo = () => {
   });
 };
 
+// Replaces the emoji shortcut with the unicode
+// If nothing matches then returns the shortcut they tried
+const replacer = (match) => {
+  const unicode = emojis[match];
+  if (unicode === undefined) {
+    return match;
+  }
+  return unicode;
+};
+
+// Creates a new message object with the input from user and adds to array
 const createMessageObject = () => {
   const message = messageInput[0].value;
   const newMessage = message.replace(/:\S+:/gi, replacer);
@@ -296,12 +299,14 @@ const createMessageObject = () => {
   };
   messages.unshift(newMessageObject);
   messageInput[0].value = '';
-  $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
+  // clears out the gif information
   $('#gifAddedBadge')[0].style.display = 'none';
   $('#gifChoiceDiv').empty();
   giphy.clearSelectedGif();
   tallyVotes();
   messageDomStringBuilder();
+  // Scrolls page view to the new comment
+  $('html, body').animate({ scrollTop: $(document).height() }, 'slow');
 };
 
 const getEmojis = () => {
@@ -326,15 +331,38 @@ const getMessages = () => {
     .catch(err => console.error(err));
 };
 
+// //////////// EVENT LISTENERS ////////// //
+
+const addEditTextEventListener = () => {
+  $('#displayMessage').on('click', '.edit', showTextArea);
+};
+
+const addDeleteBtnEventListener = () => {
+  $('body').on('click', '.delete', deleteMessage);
+};
+
+const addPostEditCommentEventListener = () => {
+  $('#displayMessage').on('click', '.postEdit', postEditComment);
+};
+
+const addThumbEvents = () => {
+  $('#displayMessage').on('click', '.thumbs-up', thumbBtnCheck);
+  $('#displayMessage').on('click', '.thumbs-down', thumbBtnCheck);
+};
+
+const addEventListeners = () => {
+  addEditTextEventListener();
+  addDeleteBtnEventListener();
+  addPostEditCommentEventListener();
+  addThumbEvents();
+};
+
 export default {
   getMessages,
   createMessageObject,
   keepClear,
   userInfo,
-  addDeleteBtnEventListener,
-  addThumbEvents,
   getEmojis,
-  addEditTextEventListener,
-  addPostEditCommentEventListener,
   disableClr,
+  addEventListeners,
 };
