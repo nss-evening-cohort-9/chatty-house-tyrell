@@ -97,7 +97,6 @@ const messageDomStringBuilder = () => {
     domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm postEdit">Post</button>`;
     domString += '</div>';
     domString += '<div class="thumbs col-auto btn-group" role="group">';
-    // domString += `<div id="thumb-up-for-${messagesUpDown[i].username}">`;
     domString += `<button type="button" id="thumb-up-${messagesUpDown[i].id}" class="thumb-btn thumbs-up btn btn-info"`;
     if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
       domString += 'disabled';
@@ -106,8 +105,6 @@ const messageDomStringBuilder = () => {
     domString += `👍<span class="badge badge-light">${messagesUpDown[i].upTotal}</span>`;
     domString += '<span class="sr-only">Thumbs Ups</span>';
     domString += '</button>';
-    // domString += '</div>';
-    // domString += `<div id="thumb-down-for-${messagesUpDown[i].username}">`;
     domString += `<button type="button" id="thumb-down-${messagesUpDown[i].id}" class="thumb-btn thumbs-down btn btn-info"`;
     if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
       domString += 'disabled';
@@ -116,7 +113,6 @@ const messageDomStringBuilder = () => {
     domString += `👎<span class="badge badge-light">${messagesUpDown[i].downTotal}</span>`;
     domString += '<span class="sr-only">Thumbs Downs</span>';
     domString += '</button>';
-    // domString += '</div>';
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
@@ -227,7 +223,6 @@ const postEditComment = (e) => {
       messagesUpDown[x].message = $(e.target).prev().val();
       messagesUpDown[x].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
-      // $(`.${messages[x].hideOrShowEdit}`).css('display', 'none');
     }
   }
 };
