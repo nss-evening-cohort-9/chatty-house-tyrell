@@ -16,7 +16,7 @@ $(document).ready(() => {
     messageInfo.getEmojis();
     messageInfo.userInfo();
     messageInfo.addEventListeners();
-    themeChange.DarkOrLightModeEventListener();
+    themeChange.addThemeEventListeners();
     addMessage.addEventHandler();
     clear.clearMessages();
     giphy.addEvents();

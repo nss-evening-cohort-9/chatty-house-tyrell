@@ -58,7 +58,8 @@
 
 .lightModeMessages{
   @include lightModeMessages;
-  }
+}
+
 .darkModeMessages{
   @include darkModeMessages;
 }
