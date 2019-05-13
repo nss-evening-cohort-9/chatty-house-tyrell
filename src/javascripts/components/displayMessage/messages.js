@@ -13,7 +13,6 @@ let commentCounter = 1;
 let messages = [];
 let messagesUpDown = [];
 let emojis = [];
-let emojiKeys = [];
 const userSelectorButtons = $('.userSelector');
 const moment = require('moment');
 
@@ -314,8 +313,6 @@ const getEmojis = () => {
     .then((response) => {
       const emojiResult = response.data.emojis;
       emojis = emojiResult;
-      emojiKeys = Object.keys(emojis);
-      console.error(emojiKeys);
     })
     .catch(err => console.error(err));
 };
