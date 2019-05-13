@@ -8,11 +8,11 @@ You should be able to change the theme to light or dark mode also. And, choose a
 ## Screenshots
 * Home Page
 
-![alt text](https://i.ibb.co/PG608hM/CT-page.png[/img])
+![alt text](https://i.ibb.co/cC9P6WX/CT-home-Page.png[/img])
 
 * Dark Mode
 
-![alt text](https://i.ibb.co/8xRV2Qj/CT-Dark-Mode.png)
+![alt text](https://i.ibb.co/SNqN18z/CT-dark-Mode.png[/img])
 
 * Thumbs Up and Down
 
@@ -20,7 +20,7 @@ You should be able to change the theme to light or dark mode also. And, choose a
 
 * Clear Mode
 
-![alt text](https://i.ibb.co/1vDv4sX/CT-clear-Mode.png[/img])
+![alt text](https://i.ibb.co/BVds47B/CT-clear-Mode.png[/img])
 
 * Editing
 
@@ -28,7 +28,7 @@ You should be able to change the theme to light or dark mode also. And, choose a
 
 * Large Mode
 
-![alt text](https://i.ibb.co/7y6c2fg/CT-Large-Mode.png)
+![alt text](https://i.ibb.co/0K2V9Q6/CT-large-Mode.png[/img])
 
 * Multiple Users
 
@@ -42,9 +42,5 @@ You should be able to change the theme to light or dark mode also. And, choose a
 * In the terminal, type `npm start` to run the webpage.
 * If you want to make a production build of this project, type `npm run build`. This will create a folder called build with all of the minified code you need.
 
-<<<<<<< HEAD
-## Authors
-=======
 ## Author
->>>>>>> e52c9b24b30bda1dc16f3466955cb4f61ff6bf55
 Mark Okafor, Greg Stephen, Sean Davis
