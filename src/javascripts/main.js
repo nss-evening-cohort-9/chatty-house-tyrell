@@ -14,11 +14,11 @@ $(document).ready(() => {
   const init = () => {
     messageInfo.getMessages();
     messageInfo.getEmojis();
+    messageInfo.userInfo();
+    messageInfo.addEventListeners();
     themeChange.DarkOrLightModeEventListener();
     addMessage.addEventHandler();
     clear.clearMessages();
-    messageInfo.userInfo();
-    messageInfo.addEventListeners();
     giphy.addEvents();
     big.fontToggleEvent();
     big.toggleDiv();
