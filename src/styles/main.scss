@@ -51,8 +51,8 @@ hr{
 }
 
 #displayMessage {
-  margin-top: 107px;
-  margin-bottom: 107px;
+  margin-top: 105px;
+  margin-bottom: 105px;
   // height: 70%;
   border: 1px solid black;
   box-shadow: 3px 3px 13px black;
@@ -69,7 +69,7 @@ img {
 
 #busName {
   font-family: 'Libre Barcode 128 Text', cursive;
-  font-size: 72px;
+  font-size: 78px;
 }
 
 .thumbs {
@@ -78,4 +78,8 @@ img {
 
 #addMessage {
   padding: 0;
+}
+
+#searchBar {
+  margin-top: 110px;
 }

@@ -3,7 +3,8 @@ import keep from '../components/displayMessage/messages';
 
 const clearMessages = () => {
   $('.clear-button').click(() => {
-    $('.message').fadeOut(3000).removeData();
+    $('.container').fadeOut(2000).removeData();
+    $('.container').fadeIn(2000);
     keep.keepClear();
     keep.disableClr();
   });
