@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import messageInfo from './components/displayMessage/messages';
 import themeChange from './components/themeChanger';
 import addMessage from './components/addMessage';
@@ -9,25 +10,24 @@ import '../styles/_footer.scss';
 import giphy from './components/displayMessage/giphy';
 // import chatbot from './components/displayMessage/chatBot';
 
-const init = () => {
-  messageInfo.getMessages();
-  messageInfo.getEmojis();
-  themeChange.DarkOrLightModeEventListener();
-  addMessage.addEventHandler();
-  clear.clearMessages();
-  messageInfo.userInfo();
-  messageInfo.addDeleteBtnEventListener();
-  messageInfo.addEditTextEventListener();
-  messageInfo.addPostEditCommentEventListener();
-  messageInfo.addThumbEvents();
-  giphy.addEvents();
-  big.fontToggleEvent();
-  big.toggleDiv();
-  big.toggleText();
-  big.toggleUserInfo();
-  big.buttonToggle();
-  big.userToggle();
-  // chatbot.addChatBotEventListener();
-};
+$(document).ready(() => {
+  const init = () => {
+    messageInfo.getMessages();
+    messageInfo.getEmojis();
+    messageInfo.userInfo();
+    messageInfo.addEventListeners();
+    themeChange.addThemeEventListeners();
+    addMessage.addEventHandler();
+    clear.clearMessages();
+    giphy.addEvents();
+    big.fontToggleEvent();
+    big.toggleDiv();
+    big.toggleText();
+    big.toggleUserInfo();
+    big.buttonToggle();
+    big.userToggle();
+    // chatbot.addChatBotEventListener();
+  };
 
-init();
+  init();
+});

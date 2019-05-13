@@ -13,13 +13,16 @@ const gifChoices = [];
 let selectedGif = '';
 
 const showGifChoices = () => {
+  // clean slate
   gifChoiceDiv.empty();
   let domString = '';
   selectedGif = '';
+  // displays all the gifs that match the search terms
   for (let i = 0; i < gifChoices.length; i += 1) {
     domString += `<input id=${gifChoices[i].id} type="image" class="gifSelector" src="${gifChoices[i].images.fixed_width_small.url}" alt="${gifChoices[i].title}">`;
   }
   gifChoiceDiv.append(domString);
+  // when you click on the gif you want to use
   $('.gifSelector').on('click', (e) => {
     const selectedGifId = e.target.id;
     for (let i = 0; i < gifChoices.length; i += 1) {
@@ -36,10 +39,18 @@ const showGifChoices = () => {
   });
 };
 
+/*
+  Adds a little box under the message input
+  that shows the user added a gif to their message
+*/
 const addGif = () => {
   $('#gifAddedBadge')[0].style.display = 'inline';
 };
 
+/*
+  Adds the gifs that match the search terms to the gifChoices array
+  and button clicks
+*/
 const getGifChoices = (e) => {
   e.preventDefault();
   e.stopPropagation();
