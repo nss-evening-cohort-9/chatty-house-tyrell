@@ -1,6 +1,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./colors";
 @import "./sliderButtons";
+@import "../javascripts/components/displayMessage/message";
 
 .lightMode {
   @include lightModeBody;
@@ -29,19 +30,27 @@ hr{
   font-size: 16px;
 }
 
+.selected-theme {
+  box-shadow: 0 0 15px #6cb5f1
+}
+
+#bigModeDiv {
+  @include sliderButton;
+  font-size: .25em;
+  @media (min-width: 768px) {
+    font-size: 1em;
+  }
+}
+#darkOrLightModeDiv {
+  margin: 1em;
+  @include sliderButton;
+}
+
 .navbar {
   padding: 0;
-  #bigModeDiv {
-    @include sliderButton;
-    font-size: .25em;
-    @media (min-width: 768px) {
-      font-size: 1em;
-    }
-  }
-  #darkOrLightModeDiv {
-    margin: 1em;
-    @include sliderButton;
-  }
+  // #themeButton {
+
+  // }
   .mobile-font {
     font-size: .25em;
     @media (min-width: 768px) {
@@ -64,4 +73,8 @@ hr{
   .dropdown-menu {
     padding-left: .5em;
   }
+}
+
+.color-picker {
+  margin-top: 1em;
 }

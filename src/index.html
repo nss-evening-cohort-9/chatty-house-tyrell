@@ -15,7 +15,7 @@
     <!-- BEGINNING OF NAVBAR -->
     <nav class="navbar fixed-top navbar-dark bg-dark">
       <div id="themeButton">
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#customThemeModal">
+        <button type="button" class="ml-5 btn btn-outline-primary mobile-font" data-toggle="modal" data-target="#customThemeModal">
             Themes
         </button>
       </div>
@@ -90,6 +90,7 @@
       </form>
     </div>
   </div>
+  <!-- THEME CHANGER MODAL -->
   <div class="modal fade" id="customThemeModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content lightMode">
@@ -102,6 +103,7 @@
         <div class="modal-body">
             <div class="container-fluid">
               <div class="row justify-content-end align-items-center">
+                <!-- DARK MODE SWITCH -->
                 <div id="darkOrLightModeDiv">
                   <label class='switch'>
                     <input type="checkbox" id="darkOrLightMode">
@@ -109,7 +111,7 @@
                   </label>
                   <h6>Dark Mode</h6>
                 </div>
-            
+            <!-- LARGE FONT SWITCH -->
                 <div class="mr-2" id="bigModeDiv">
                   <label class='switch'>
                     <input type="checkbox" id="largeSize">
@@ -119,31 +121,35 @@
                 </div>
               </div>
               <div class="theme-styles row justify-content-around">
-                <div class="card theme-card col-5">
+                <div class="card theme-custom theme-card col-5 lightModeMessages">
                   <div class="card-top custom-theme-top">
                     <div class="color-picker">
                       <label for="backgroundColorPicker">Background Color:</label>
-                      <input type="color" id="backgroundColorPicker" name="backgroundColorPicker" value="#ff0000">
+                      <input type="color" id="backgroundColorPicker" name="backgroundColorPicker" value="#D9FFF5">
                     </div>
                     <div class="color-picker">
+                        <label for="messageColorPicker">Message Color:</label>
+                        <input type="color" id="messageColorPicker" name="textColorPicker" value="#B9F5D8">
+                      </div>
+                    <div class="color-picker">
                       <label for="textColorPicker">Text Color:</label>
-                      <input type="color" id="textColorPicker" name="textColorPicker" value="#ff0000">
+                      <input type="color" id="textColorPicker" name="textColorPicker" value="#1D1E18">
                     </div>
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">Custom Theme</h5>
-                    <p class="card-text">Select your background and text color, press the Choose button and then the Save Choices</p>
-                    <a href="#" class="btn btn-outline-primary">Choose</a>
+                    <p class="card-text">Select your own text and background color</p>
+                    <a href="#" class="theme-custom-btn btn btn-outline-primary">Choose</a>
                   </div>
                 </div>
-                <div class="card theme-card col-5">
+                <div class="card theme-classic theme-card col-5 lightModeMessages selected-theme">
                   <div class="card-top">
                     <img src="./assets/images/Classic_Theme.png" class="card-img-top" alt="...">
                   </div>
                   <div class="card-body">
                     <h5 class="card-title">Classic Theme</h5>
                     <p class="card-text">The original theme as chosen by the developers</p>
-                    <a href="#" class="btn btn-outline-primary">Choose</a>
+                    <a href="#" class="theme-classic-btn btn btn-outline-primary">Choose</a>
                   </div>
                 </div>
               </div>
@@ -151,7 +157,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-outline-primary">Save changes</button>
+          <button type="button" id="theme-choice-btn" class="btn btn-outline-primary" data-dismiss="modal">Save changes</button>
         </div>
       </div>
     </div>
