@@ -42,6 +42,22 @@ hr{
   margin: auto;
 }
 
+#themeButton {
+  margin-left: 3em;
+}
+
+.theme-styles {
+  text-align: center;
+  .custom-theme-top {
+    margin-top: 1em;
+    border: 1px solid black;
+    padding: 1em;
+    .color-picker {
+      margin-top: 1em;
+    }
+  }
+}
+
 .thumb-btn {
   margin-right: 10px;
 }
@@ -49,6 +65,7 @@ hr{
 .navbar {
   padding: 0;
 }
+
 
 #displayMessage {
   margin-top: 107px;
