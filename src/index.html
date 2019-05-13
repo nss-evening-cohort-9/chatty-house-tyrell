@@ -12,20 +12,39 @@
 
 <body class="lightMode" id="largeText">
   <div class="container">
+    <!-- BEGINNING OF NAVBAR -->
     <nav class="navbar fixed-top navbar-dark bg-dark">
       <div id="themeButton">
         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#customThemeModal">
             Themes
         </button>
       </div>
+      <!-- DARKMODE SWITCH -->
+      <!-- <div id="darkOrLightModeDiv">
+        <label class='switch'>
+          <input type="checkbox" id="darkOrLightMode">
+          <span class="slider round"></span>
+        </label>
+        <h6 class="text-white mobile-font">Dark Mode</h6>
+      </div> -->
+      <!-- LARGE TEXT SWITCH -->
+      <!-- <div id="bigModeDiv">
+        <label class='switch'>
+          <input type="checkbox" id="largeSize">
+          <span class="slider round"></span>
+        </label>
+        <h6 class="text-white mobile-font">Large Mode</h6>
+      </div> -->
+
       <div id="navTitle" class="text-center d-flex justify-content-center">
-        <h1 class="text-white d-flex justify-content-center" id="busName">Chatty Tyrell</h1>
+        <h1 class="mobile-font text-white d-flex justify-content-center" id="busName">Chatty Tyrell</h1>
       </div>
-      <button class="clear-button btn btn-outline-danger float left">Clear</button>
+      <button class="mobile-font clear-button btn btn-outline-danger float left">Clear</button>
+      <!-- USER SELECTION -->
       <div class="users nav-item dropdown btn-group dropleft">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          <button id="userBtn" class="btn btn-outline-success">Login</button>
+          <button id="userBtn" class="mobile-font btn btn-outline-success">Login</button>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <input type="radio" class="userSelector" name="userName" id="user0" value="Anonymous" selected>
@@ -43,30 +62,30 @@
       </nav>
     </div>
   </div>
+</div>
 
-  <div class="myDiv">
-      <div class="bg"></div>
+<!-- <input type="text" id="searchBar" placeholder="Search Messages..." data-search> -->
+
+  <div id="displayMessage" class="lightModeMessages">
+    <!-- WHERE ALL THE MESSAGES SHOW UP -->
   </div>
 
-  <div id="displayMessage" class="lightModeMessages"></div>
-
-  </div>
+  <!-- BEGGINING OF THE FOOTER -->
   <div id="addMessage" class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div id="postingAsDiv" class="col 12 col-md-3 offset-md-1 mt-3">
         <p>Currently posting as:</p>
         <p id="userPostingAs">Anonymous</p>
       </div>
-      <form class="col-12 col-md-7 offset-md-1 offset-lg-0 mt-3" id="messageSubmitForm" action="POST">
+      <form class="col-11 col-md-6 offset-md-1 offset-lg-0 mt-3" id="messageSubmitForm" action="POST">
         <div class="input-group">
           <input id="message-input" type="text" class="form-control" placeholder="Say Something!">
-          <div class="input-group-append">
+          <div class="input-group-append message-input-buttons">
             <button type="submit" id="messageSubmit" class="btn btn-outline-success">Post</button>
             <button type="button" id="addGif" class="btn btn-outline-info" data-toggle="modal"
               data-target="#gifModal">Add gif</button>
           </div>
         </div>
-
         <span id="gifAddedBadge" class="badge badge-info">Gif Added</span>
       </form>
     </div>
@@ -137,6 +156,7 @@
       </div>
     </div>
   </div>
+  <!-- BEGGINING OF THE GIF MODAL -->
   <div class="modal fade" id="gifModal" tabindex="-1" role="dialog" aria-labelledby="gifModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -158,7 +178,7 @@
             </form>
           </div>
           <div id="gifChoiceDiv" class="row justify-content-around">
-
+            <!-- WHERE THE GIFS SHOW UP -->
           </div>
         </div>
         <div class="modal-footer">

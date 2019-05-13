@@ -10,15 +10,6 @@
   @include darkModeBody;
 }
 
-#bigModeDiv {
-  @include sliderButton;
-}
-
-#darkOrLightModeDiv {
-  margin: 1em;
-  @include sliderButton;
-}
-
 body {
   font-family: 'Rock Salt', cursive;
 }
@@ -38,61 +29,39 @@ hr{
   font-size: 16px;
 }
 
-#navTitle {
-  margin: auto;
-}
-
-#themeButton {
-  margin-left: 3em;
-}
-
-.theme-styles {
-  text-align: center;
-  .custom-theme-top {
-    margin-top: 1em;
-    border: 1px solid black;
-    padding: 1em;
-    .color-picker {
-      margin-top: 1em;
-    }
-  }
-}
-
-.thumb-btn {
-  margin-right: 10px;
-}
-
 .navbar {
   padding: 0;
-}
-
-
-#displayMessage {
-  margin-top: 107px;
-  margin-bottom: 107px;
-  // height: 70%;
-  border: 1px solid black;
-  box-shadow: 3px 3px 13px black;
-  border: 0;
-}
-
-img {
-  border: 1px solid black;
-}
-
-.dropdown-menu {
-  padding-left: .5em;
-}
-
-#busName {
-  font-family: 'Libre Barcode 128 Text', cursive;
-  font-size: 72px;
-}
-
-.thumbs {
-  font-family: 'Antic Slab', serif;
-}
-
-#addMessage {
-  padding: 0;
+  #bigModeDiv {
+    @include sliderButton;
+    font-size: .25em;
+    @media (min-width: 768px) {
+      font-size: 1em;
+    }
+  }
+  #darkOrLightModeDiv {
+    margin: 1em;
+    @include sliderButton;
+  }
+  .mobile-font {
+    font-size: .25em;
+    @media (min-width: 768px) {
+      font-size: .75em;
+    }
+    @media (min-width: 992px) {
+      font-size: 1em;
+    }
+  }
+  #navTitle {
+    margin: auto;
+    #busName {
+      font-family: 'Libre Barcode 128 Text', cursive;
+      font-size: 36px;
+      @media (min-width: 768px) {
+        font-size: 72px;
+      }
+    }
+  }
+  .dropdown-menu {
+    padding-left: .5em;
+  }
 }
