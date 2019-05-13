@@ -34,6 +34,10 @@ You should be able to change the theme to light or dark mode also. And, choose a
 
 ![alt text](https://i.ibb.co/8XHTJJr/CT-multi-User.png)
 
+* Custom Themes
+
+![alt text](https://i.ibb.co/sPmbG93/CT-Custome-Themes.png[/img])
+
 ## Installation Instructions
 * Clone down this repo
 * At the root of the project, run `npm install`
@@ -42,9 +46,5 @@ You should be able to change the theme to light or dark mode also. And, choose a
 * In the terminal, type `npm start` to run the webpage.
 * If you want to make a production build of this project, type `npm run build`. This will create a folder called build with all of the minified code you need.
 
-<<<<<<< HEAD
-## Authors
-=======
 ## Author
->>>>>>> e52c9b24b30bda1dc16f3466955cb4f61ff6bf55
 Mark Okafor, Greg Stephen, Sean Davis
