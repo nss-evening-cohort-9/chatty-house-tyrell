@@ -36,14 +36,8 @@ const tallyVotes = () => {
   messages.forEach((message) => {
     const messageVotes = votes.votes.filter(msg => msg.messageId === message.id);
     const messageWithUpDown = Object.create(message);
-    // creates the new message object with new up and down total votes
+    // creates the new message object with new up and down total votes and message id
     messageWithUpDown.id = message.id;
-    messageWithUpDown.username = message.username;
-    messageWithUpDown.timeStamp = message.timeStamp;
-    messageWithUpDown.image = message.image;
-    messageWithUpDown.hideOrShowEdit = message.hideOrShowEdit;
-    messageWithUpDown.gif = message.gif;
-    messageWithUpDown.gifAltText = message.gifAltText;
     messageWithUpDown.upTotal = messageVotes.filter(msg => msg.up).length;
     messageWithUpDown.downTotal = messageVotes.filter(msg => msg.down).length;
     messagesUpDown.push(messageWithUpDown);
@@ -62,53 +56,58 @@ const messageDomStringBuilder = () => {
   // this clears the div each time for a fresh start
   $('#displayMessage').html('');
   // loops thru the messages array but limits it to 20
-  for (let i = 0; i < 20 && i < messagesUpDown.length; i += 1) {
+  for (let i = 0; i < 20 && i < messages.length; i += 1) {
     let domString = '';
-    domString += `<div id="${messagesUpDown[i].id}" class="media message container">`;
-    domString += `<img src="${messagesUpDown[i].image}" class="mr-3 userImage" alt="...">`;
+    domString += `<div id="${messages[i].id}" class="media message container">`;
+    domString += `<img src="${messages[i].image}" class="mr-3 userImage" alt="...">`;
     domString += '<div class="media-body">';
     domString += '<div class="media-header row justify-content-start">';
-    domString += `<h5 class="userName mt-0 col-auto" >${messagesUpDown[i].username}</h5>`;
-    domString += `<p class="timeStamp mt-0 col">${messagesUpDown[i].timeStamp}</p>`;
-    if (messagesUpDown[i].username === userInfoObject[0].info.name) {
+    domString += `<h5 class="userName mt-0 col-auto" >${messages[i].username}</h5>`;
+    domString += `<p class="timeStamp mt-0 col">${messages[i].timeStamp}</p>`;
+    if (messages[i].username === userInfoObject[0].info.name) {
       domString += '<div class="editText ml-auto mr-1">';
-      domString += `<button id="edit${messagesUpDown[i].id}" class="btn btn-primary float right edit btn-sm">Edit</button>`;
+      domString += `<button id="edit${messages[i].id}" class="btn btn-primary float right edit btn-sm">Edit</button>`;
       domString += '</div>';
     }
-    if (messagesUpDown[i].username === userInfoObject[0].info.name) {
-      domString += `<button id="${messagesUpDown[i].id}" class="deleteButton btn btn-danger float right delete btn-sm mr-2">Delete</button>`;
+    if (messages[i].username === userInfoObject[0].info.name) {
+      domString += `<button id="${messages[i].id}" class="deleteButton btn btn-danger float right delete btn-sm mr-2">Delete</button>`;
     }
     domString += '</div>';
     domString += '<div class="font-weight-normal messageContent col-12">';
-    domString += `<p>${messagesUpDown[i].message}</p>`;
+    domString += `<p>${messages[i].message}</p>`;
     // Gif
-    if (messagesUpDown[i].gif !== '') {
-      domString += `<img src="${messagesUpDown[i].gif}" alt="${messagesUpDown[i].gifAltText}">`;
+    if (messages[i].gif !== '') {
+      domString += `<img src="${messages[i].gif}" alt="${messages[i].gifAltText}">`;
     }
     domString += '</div>';
     // Edit Form
-    domString += `<div class="${messagesUpDown[i].hideOrShowEdit} editForm">`;
-    domString += `<textarea id="textArea" rows="4" cols="50">${messagesUpDown[i].message}</textarea>`;
-    domString += `<button id="postEdit${messagesUpDown[i].id}" class="btn btn-dark btn-sm ml-3 mb-4 postEdit">Post</button>`;
+    domString += `<div class="${messages[i].hideOrShowEdit} editForm">`;
+    domString += `<textarea id="textArea" rows="4" cols="50">${messages[i].message}</textarea>`;
+    domString += `<button id="postEdit${messages[i].id}" class="btn btn-dark btn-sm ml-3 mb-4 postEdit">Post</button>`;
     domString += '</div>';
     // THUMBS
     domString += '<div class="thumbs col-auto btn-group" role="group">';
-    domString += `<button type="button" id="thumb-up-${messagesUpDown[i].id}" class="thumb-btn thumbs-up btn btn-info"`;
-    if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
+    domString += `<button type="button" id="thumb-up-${messages[i].id}" class="thumb-btn thumbs-up btn btn-info"`;
+    if (messages[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
       domString += 'disabled';
     }
     domString += '>';
-    domString += `👍<span class="badge badge-light">${messagesUpDown[i].upTotal}</span>`;
-    domString += '<span class="sr-only">Thumbs Ups</span>';
-    domString += '</button>';
-    domString += `<button type="button" id="thumb-down-${messagesUpDown[i].id}" class="thumb-btn thumbs-down btn btn-info"`;
-    if (messagesUpDown[i].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
-      domString += 'disabled';
+    // loops thru the messages with up down stuff for info
+    for (let x = 0; x < messagesUpDown.length; x += 1) {
+      if (messagesUpDown[x].id === messages[i].id) {
+        domString += `👍<span class="badge badge-light">${messagesUpDown[x].upTotal}</span>`;
+        domString += '<span class="sr-only">Thumbs Ups</span>';
+        domString += '</button>';
+        domString += `<button type="button" id="thumb-down-${messagesUpDown[x].id}" class="thumb-btn thumbs-down btn btn-info"`;
+        if (messagesUpDown[x].username === userInfoObject[0].info.name || userInfoObject[0].info.name === 'Anonymous') {
+          domString += 'disabled';
+        }
+        domString += '>';
+        domString += `👎<span class="badge badge-light">${messagesUpDown[x].downTotal}</span>`;
+        domString += '<span class="sr-only">Thumbs Downs</span>';
+        domString += '</button>';
+      }
     }
-    domString += '>';
-    domString += `👎<span class="badge badge-light">${messagesUpDown[i].downTotal}</span>`;
-    domString += '<span class="sr-only">Thumbs Downs</span>';
-    domString += '</button>';
     domString += '</div>';
     domString += '</div>';
     domString += '</div>';
@@ -186,42 +185,29 @@ const deleteMessage = (e) => {
       }
     }
   });
-  messagesUpDown.forEach((message, index) => {
-    if (e.target.classList.contains('delete')) {
-      if (deleteButtonId === `${message.id}`) {
-        messagesUpDown.splice(index, 1);
-      }
-    }
-  });
   messageDomStringBuilder();
 };
 
 // Will show the edit comment form of the message that houses the button clicked
 const showTextArea = (e) => {
   const showEditTextButtonId = e.target.id;
-  for (let i = 0; i < messagesUpDown.length; i += 1) {
-    if (showEditTextButtonId === `edit${messagesUpDown[i].id}`) {
-      messagesUpDown[i].hideOrShowEdit = 'shown';
+  for (let i = 0; i < messages.length; i += 1) {
+    if (showEditTextButtonId === `edit${messages[i].id}`) {
+      messages[i].hideOrShowEdit = 'shown';
       messageDomStringBuilder();
     } else {
-      messagesUpDown[i].hideOrShowEdit = 'hidden';
+      messages[i].hideOrShowEdit = 'hidden';
       messageDomStringBuilder();
     }
   }
 };
 
-// Will change the message in both message and messagesUpDown arrays
+// Will change the message in message array
 // Will then change the display of the edit message form to hidden
 const postEditComment = (e) => {
   e.preventDefault();
   e.stopPropagation();
   const postButtonId = e.target.id;
-  for (let x = 0; x < messagesUpDown.length; x += 1) {
-    if (postButtonId === `postEdit${messagesUpDown[x].id}`) {
-      messagesUpDown[x].message = $(e.target).prev().val();
-      messagesUpDown[x].hideOrShowEdit = 'hidden';
-    }
-  }
   for (let x = 0; x < messages.length; x += 1) {
     if (postButtonId === `postEdit${messages[x].id}`) {
       messages[x].message = $(e.target).prev().val();
@@ -233,7 +219,6 @@ const postEditComment = (e) => {
 
 // Removes everything from the arrays so when clear is pressed they stay cleared
 const keepClear = () => {
-  messagesUpDown = [];
   messages = [];
   messageDomStringBuilder();
 };
