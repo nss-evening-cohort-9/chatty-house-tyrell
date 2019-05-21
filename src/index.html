@@ -19,29 +19,15 @@
             Themes
         </button>
       </div>
-      <!-- DARKMODE SWITCH -->
-      <!-- <div id="darkOrLightModeDiv">
-        <label class='switch'>
-          <input type="checkbox" id="darkOrLightMode">
-          <span class="slider round"></span>
-        </label>
-        <h6 class="text-white mobile-font">Dark Mode</h6>
-      </div> -->
-      <!-- LARGE TEXT SWITCH -->
-      <!-- <div id="bigModeDiv">
-        <label class='switch'>
-          <input type="checkbox" id="largeSize">
-          <span class="slider round"></span>
-        </label>
-        <h6 class="text-white mobile-font">Large Mode</h6>
-      </div> -->
-
       <div id="navTitle" class="text-center d-flex justify-content-center">
         <h1 class="mobile-font text-white d-flex justify-content-center" id="busName">Chatty Tyrell</h1>
       </div>
       <button class="mobile-font clear-button btn btn-outline-danger float left">Clear</button>
       <!-- USER SELECTION -->
-      <div class="users nav-item dropdown btn-group dropleft">
+      <div id="logout" class="hide">
+          <button id="logoutBtn" class="mobile-font btn btn-outline-danger" role="button">LogOut</button>
+        </div>
+      <div id="login" class="users nav-item dropdown btn-group dropleft">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           <button id="userBtn" class="mobile-font btn btn-outline-success">Login</button>

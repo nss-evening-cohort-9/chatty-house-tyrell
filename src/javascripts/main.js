@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import firebase from 'firebase/app';
 import messageInfo from './components/displayMessage/messages';
 import themeChange from './components/themeChanger';
 import addMessage from './components/addMessage';
@@ -8,10 +9,14 @@ import 'bootstrap';
 import '../styles/main.scss';
 import '../styles/_footer.scss';
 import giphy from './components/displayMessage/giphy';
+import apiKeys from './helpers/apiKeys.json';
+import auth from './helpers/data/auth';
 // import chatbot from './components/displayMessage/chatBot';
 
 $(document).ready(() => {
   const init = () => {
+    firebase.initializeApp(apiKeys.firebaseKeys);
+    auth.checkLoginStatus();
     messageInfo.getMessages();
     messageInfo.getEmojis();
     messageInfo.userInfo();

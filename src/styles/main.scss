@@ -48,9 +48,6 @@ hr{
 
 .navbar {
   padding: 0;
-  // #themeButton {
-
-  // }
   .mobile-font {
     font-size: .25em;
     @media (min-width: 768px) {
@@ -70,6 +67,10 @@ hr{
       }
     }
   }
+  #logout {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
   .dropdown-menu {
     padding-left: .5em;
   }
@@ -77,4 +78,8 @@ hr{
 
 .color-picker {
   margin-top: 1em;
+}
+
+.hide {
+  display: none;
 }

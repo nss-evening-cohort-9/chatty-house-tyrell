@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-package-lock.json
-node_modules/
-=======
 node_modules/
 package-lock.json
->>>>>>> master
 dist/
 build/
+src/javascripts/helpers/apiKeys.json

@@ -1,4 +1,6 @@
 import $ from 'jquery';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import messageData from '../../helpers/data/getMessageData';
 import users from '../user';
 import votes from '../votes';
@@ -234,6 +236,8 @@ const postingAs = () => {
 // Then reprints the messages with userInfo for conditionals
 const userInfo = () => {
   userSelectorButtons.click((e) => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider);
     const userId = e.target.id;
     for (let i = 0; i < users.users.length; i += 1) {
       if (userId === users.users[i].user.id) {
@@ -243,6 +247,10 @@ const userInfo = () => {
     postingAs();
     messageDomStringBuilder();
   });
+};
+
+const logout = () => {
+  firebase.auth().signOut();
 };
 
 // Replaces the emoji shortcut with the unicode
@@ -332,11 +340,16 @@ const addThumbEvents = () => {
   $('#displayMessage').on('click', '.thumbs-down', thumbBtnCheck);
 };
 
+const logoutEvent = () => {
+  $('#logout').on('click', logout);
+};
+
 const addEventListeners = () => {
   addEditTextEventListener();
   addDeleteBtnEventListener();
   addPostEditCommentEventListener();
   addThumbEvents();
+  logoutEvent();
 };
 
 export default {
